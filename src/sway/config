@@ -261,4 +261,20 @@ bindsym $mod+r mode "resize"
 # important to make the magic work. And if you want to learn the secret behind
 # the trick, it's all in the `wordexp(3)`.
 #
+
+# border
+for_window [class=".*"] border normal 1
+
+# Janela focada: borda roxa, texto branco
+client.focused          #613583 #000000 #ffffff #000000 #613583
+
+# Janela visível mas não ativa: borda roxa escura, texto branco
+client.focused_inactive #4d2d6e #000000 #ffffff #000000 #4d2d6e
+
+# Janela inativa: borda ainda mais escura, texto branco
+client.unfocused        #2f1736 #000000 #ffffff #000000 #2f1736
+
+# Janela urgente: borda rosa/neon, texto branco
+client.urgent           #ff3399 #000000 #ffffff #000000 #ff3399
+
 include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'

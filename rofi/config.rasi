@@ -1,0 +1,30 @@
+rofi {
+    theme: "cyberpunk";
+}
+
+* {
+    border-radius: 10px;
+    padding: 10px;
+    font: "JetBrains Mono 12";
+}
+
+window {
+    width: 50%;
+    height: 50%;
+}
+
+listview {
+    lines: 10;
+    fixed-height: false;
+}
+
+element {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+element selected {
+    background: #9141ac;
+    color: #ffffff;
+}
+
