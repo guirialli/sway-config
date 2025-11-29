@@ -246,3 +246,30 @@ button {
 #custom-conservation.conservation-off {
     color: #F28FAD; /* Vermelho/Rosa (Alerta/Atenção) */
 }
+
+/*Power*/
+#custom-power {
+    color: #ffffff; /* Cor do ícone no Waybar */
+    background-color: transparent;
+    padding: 0 15px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    margin: 0 10px 0 5px
+}
+#custom-power:hover{
+   color: red;
+}
+
+/* Estilo para o menu em si */
+.menu-reboot,
+.menu-shutdown,
+.menu-suspend,
+.menu-logout {
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.menu-shutdown {
+    color: #e74c3c; 
+}

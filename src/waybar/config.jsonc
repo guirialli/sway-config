@@ -24,7 +24,8 @@
         "battery",
 	"custom/conservation",
         "clock",
-        "tray"
+        "tray",
+	"custom/power"
     ],
     "keyboard-state": {
         "numlock": true,
@@ -128,5 +129,17 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    }
+    },
+  "custom/power": {
+       "format": "⏻",
+       "tooltip": false,
+       "menu": "on-click",
+       "menu-file": "~/.config/waybar/xml/power_menu.xml",
+       "menu-actions":{
+       	    "reboot": "systemctl reboot",
+	    "shutdown": "systemctl shutdown",
+	    "suspend": "systemctl suspend",
+	    "logout": "swaymsg exit"
+       }
+   }
 }
