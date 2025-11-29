@@ -6,4 +6,4 @@ output HDMI-A-1 pos 1670 0 scale 1.05 mode 1920x1080@74.973Hz
 
 ### Output configuration
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/guirialli/Imagens/wallpaper.jpg fill

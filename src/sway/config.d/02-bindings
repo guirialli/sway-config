@@ -82,10 +82,10 @@ bindsym $mod+e layout toggle split
 bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # Swap focus between the tiling area and the floating area
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space focus mode_toggle
 
 # Move focus to the parent container
 bindsym $mod+a focus parent
@@ -137,9 +137,12 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 bindsym Print exec grim
 # Blueman
 bindsym $mod+SHIFT+b exec blueman-manager
+# Ulancher
+bindsym $mod+space exec ulauncher-toggle
 
 
 #My Peronsal keybinds
 #Chorme
 bindsym $mod+g exec google-chrome-stable
 bindsym $mod+SHIFT+e exec nautilus
+

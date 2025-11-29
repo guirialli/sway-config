@@ -1,0 +1,46 @@
+/* Cores Roxo Dark */
+@define-color bg_dark #242424; 
+@define-color fg_light #ffffff;
+@define-color highlight #9A67EA; 
+@define-color border_color #4C4C4C;
+
+window {
+    /* Fundo da janela (Wofi) */
+    background-color: @bg_dark;
+    border: 2px solid @border_color;
+    border-radius: 8px; /* Cantos arredondados */
+    padding: 5px;
+}
+
+#input {
+    /* Caixa de pesquisa */
+    background-color: #333333;
+    color: @fg_light;
+    border: 1px solid @highlight;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 5px;
+}
+
+#outer-box {
+    padding: 5px;
+}
+
+#inner-box {
+    /* Padding interno para as opcoes */
+    padding: 5px;
+}
+
+#scroll {
+    /* Scrollbar */
+}
+
+#text {
+    color: @fg_light;
+}
+
+#entry:selected {
+    /* Opcao selecionada */
+    background-color: @highlight; /* Roxo de Destaque */
+    border-radius: 6px;
+}

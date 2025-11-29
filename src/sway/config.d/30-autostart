@@ -1,0 +1,25 @@
+
+exec waybar
+# Inicia o agente de autenticacao Polkit para janelas graficas de senha
+exec /usr/bin/lxqt-policykit-agent &
+
+# Blueman
+exec blueman-applet &
+
+# Mako
+exec mako &
+
+# Wifi
+exec nm-applet --indicator &
+
+
+# (1) Portal Wayland Especifico para wlroots/Sway
+exec --no-startup-id xdg-desktop-portal-wlr & 
+
+# (2) Portal GTK (fornece a interface grafica de selecao)
+exec --no-startup-id xdg-desktop-portal-gtk & 
+
+# (3) Portal Principal (deve ser o ultimo a ser iniciado)
+exec --no-startup-id xdg-desktop-portal &
+
+exec ulauncher
