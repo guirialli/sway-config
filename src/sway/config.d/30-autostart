@@ -12,6 +12,9 @@ exec mako &
 # Wifi
 exec nm-applet --indicator &
 
+# Idle
+exec $HOME/.config/waybar/scripts/toggle_idle.sh
+
 
 
 # Portals

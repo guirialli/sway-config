@@ -1,31 +1,34 @@
+/*
+ * Waybar Style - Versão Limpa e Otimizada
+ * Tema: Cyberpunk (Roxo e Escuro)
+ * Módulos em uso: workspaces, mode, scratchpad, window, custom/idle, pulseaudio,
+ * network, power-profiles-daemon, backlight, language, battery,
+ * custom/conservation, clock, tray, keyboard-state.
+ */
+
+/* ========================================================================= */
+/* 1. ESTILO GLOBAL */
+/* ========================================================================= */
+
 * {
     font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
     font-size: 13px;
 }
 
 window#waybar {
-    background: rgba(10, 10, 25, 0.6); /* fundo escuro translúcido */
-    border-radius: 12px; /* cantos arredondados */
-    margin: 6px 6px; /* dá um espaço da borda da tela */
-    padding: 6px;
-    border: 1px solid rgba(138, 43, 226, 0.4); /* borda roxa fraca */
-    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3); /* brilho suave cyberpunk */
+    background: rgba(10, 10, 25, 0.7); /* Fundo escuro levemente translúcido (70%) */
+    border-radius: 12px;
+    margin: 6px 6px;
+    padding: 3px;
+    border: 1px solid rgba(138, 43, 226, 0.5); /* Borda roxa fraca */
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.4); /* Brilho suave */
 }
-
 
 window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
+/* Estilos de Janelas Específicas (mantidos por precaução) */
 window#waybar.termite {
     background-color: #3F3F3F;
 }
@@ -35,25 +38,71 @@ window#waybar.chromium {
     border: none;
 }
 
+/* ========================================================================= */
+/* 2. ESTILOS DE MÓDULO GENÉRICOS (Padding e Cor) */
+/* ========================================================================= */
+
+/* Aplica padding e cor branca à maioria dos módulos */
+#clock,
+#battery,
+#backlight,
+#network,
+#pulseaudio,
+#tray,
+#power-profiles-daemon,
+#language,
+#keyboard-state,
+#custom-idle,
+#custom-conservation,
+#mode,
+#scratchpad {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+/* ========================================================================= */
+/* 3. ESTILOS DE INTERAÇÃO (Hover) */
+/* ========================================================================= */
+
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
-    /* Avoid rounded borders under each button name */
+    box-shadow: none;
     border: none;
     border-radius: 0;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
-    background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+/* Estilo de hover padrão para a maioria dos módulos (lista COMPLETA) */
+#clock:hover,
+#battery:hover,
+#backlight:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover,
+#power-profiles-daemon:hover,
+#language:hover,
+#keyboard-state:hover,
+#custom-idle:hover,
+#custom-conservation:hover,
+#mode:hover,
+#scratchpad:hover {
+    background-color: rgba(138, 43, 226, 0.25); /* Roxo mais visível no hover */
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
 }
 
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-    background-color: #a37800;
+
+/* ========================================================================= */
+/* 4. MÓDULOS ESPECÍFICOS */
+/* ========================================================================= */
+
+/* Sway Window Title */
+#window {
+    margin: 0 4px;
+    font-style: italic;
+    color: #90B1B1;
+    padding: 0 10px;
 }
 
+/* Workspaces */
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
@@ -61,92 +110,66 @@ button:hover {
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(138, 43, 226, 0.15); /* Hover suave nos workspaces */
+    box-shadow: none;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: rgba(138, 43, 226, 0.5); /* Roxo sólido quando focado */
+    color: #E6E6FA;
+    box-shadow: none;
+    border-radius: 6px;
 }
 
 #workspaces button.urgent {
     background-color: #eb4d4b;
+    color: #ffffff;
+    border-radius: 6px;
 }
 
+/* Sway Mode (Ex: Resize) */
 #mode {
-    background-color: #64727D;
+    background-color: #8A2BE2; /* Azul Violeta (Cyberpunk principal) */
     box-shadow: inset 0 -3px #ffffff;
+    font-weight: bold;
+    color: #FFFFFF;
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#power-profiles-daemon,
-#mpd {
-    padding: 0 10px;
+/* Sway Scratchpad */
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+
+/* Keyboard State (Caps/Num Lock) */
+#keyboard-state {
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
     color: #ffffff;
 }
 
-#clock:hover,
-#battery:hover,
-#cpu:hover,
-#memory:hover,
-#disk:hover,
-#temperature:hover,
-#backlight:hover,
-#network:hover,
-#pulseaudio:hover,
-#wireplumber:hover,
-#custom-media:hover,
-#tray:hover,
-#mode:hover,
-#idle_inhibitor:hover,
-#scratchpad:hover,
-#power-profiles-daemon:hover,
-#mpd:hover 
-#keybord:hover
-#language:hover{
-    background-color: rgba(138, 43, 226, 0.2); /* roxo fraquinho, cyberpunk */
-    border-radius: 6px; /* cantos arredondados, estilo futurista */
-    transition: background-color 0.3s ease; /* animação suave */
+#keyboard-state > label.locked {
+    background: rgba(138, 43, 226, 0.4); /* Roxo quando travado */
+    border-radius: 4px;
 }
 
+/* ========================================================================= */
+/* 5. MÓDULOS DE ESTADO (BATERIA, PERFIS, CUSTOMIZADOS) */
+/* ========================================================================= */
 
-#window,
-#workspaces {
-    margin: 0 4px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-#battery {
-    background-color: #ffffff;
-    color: #000000;
-}
-
+/* Battery */
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: #000000;
+    background-color: #26A65B; /* Verde de carregamento */
 }
 
 @keyframes blink {
@@ -156,7 +179,6 @@ button:hover {
     }
 }
 
-/* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
     background-color: #f53c3c;
     color: #ffffff;
@@ -167,12 +189,10 @@ button:hover {
     animation-direction: alternate;
 }
 
-#power-profiles-daemon {
-    padding-right: 15px;
-}
-
+/* Power Profiles Daemon */
 #power-profiles-daemon.performance {
     color: #f53c3c;
+    font-weight: bold;
 }
 
 #power-profiles-daemon.balanced {
@@ -183,95 +203,46 @@ button:hover {
     color: #2ecc71;
 }
 
-label:focus {
-    background-color: #000000;
+/* Custom Idle Inhibitor (#custom-idle) */
+#custom-idle {
+    transition: all 0.3s ease-in-out;
+    padding: 0 15px 0 10px
 }
 
-
-#temperature.critical {
-    color: #eb4d4b;
+/* Estado ATIVO (Suspensão OK) */
+#custom-idle.idle-on {
+    color: #4CAF50;
+    background-color: #2e432f;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
-#tray > .passive {
-    -gtk-icon-effect: dim;
+/* Estado DESATIVADO (Suspensão desligada - Alerta) */
+#custom-idle.idle-off {
+    color: #FF5733;
+    background-color: #472b25;
+    border-radius: 4px;
+    font-style: italic;
+    animation: pulse 1s infinite alternate;
 }
 
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 87, 51, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 5px 3px rgba(255, 87, 51, 0.0);
+    }
 }
 
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
-#language {
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad.empty {
-	background-color: transparent;
-}
-
-#privacy {
-    padding: 0;
-}
-
-#privacy-item {
-    padding: 0 5px;
-    color: white;
-}
-
-#privacy-item.screenshare {
-    background-color: #cf5700;
-}
-
-#privacy-item.audio-in {
-    background-color: #1ca000;
-}
-
-#privacy-item.audio-out {
-    background-color: #0069d4;
-}
-
-/* Conteudo de ~/.config/waybar/style.css */
-
-/* Estilo para quando o MODO CONSERVAÇÃO esta LIGADO */
+/* Custom Conservation Mode (#custom-conservation) */
+/* Modo Conservação LIGADO (bateria 'protegida') */
 #custom-conservation.conservation-on {
-    color: #ABE9B3; /* Verde claro (indicando que a bateria esta 'protegida') */
+    color: #ABE9B3; /* Verde claro */
+    font-weight: bold;
 }
 
-/* Estilo para quando o MODO CONSERVAÇÃO esta DESLIGADO */
+/* Modo Conservação DESLIGADO (carregamento total) */
 #custom-conservation.conservation-off {
-    color: #F28FAD; /* Vermelho/Rosa (indicando carregamento total, que estressa a bateria) */
-}
-
-/* Estilo padrao para o modulo */
-#custom-conservation {
-    margin-right: 10px;
-    padding: 0 10px;
+    color: #F28FAD; /* Vermelho/Rosa (Alerta/Atenção) */
 }
