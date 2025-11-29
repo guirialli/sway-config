@@ -1,0 +1,19 @@
+# --- Estilo Adw ---
+
+# Gaps (espaco) internos e externos minimos
+gaps inner 5
+gaps outer 0
+
+# Borda de Janela: Use a cor do Adwaita para a borda.
+# Cor do Adwaita Dark (focada): #3584E4 (azul GNOME)
+# Cor do Adwaita Dark (nao focada): #4C4C4C
+
+# 1. Bordas mínimas e limpas (3 pixels)
+default_border pixel 3
+
+# 2. Cores da Borda
+# --- Bordas Focadas (Roxo Escuro) ---
+client.focused #9A67EA #9A67EA #9A67EA #9A67EA
+client.unfocused #4C4C4C #4C4C4C #4C4C4C #4C4C4C
+client.focused_inactive #4C4C4C #4C4C4C #4C4C4C #4C4C4C
+

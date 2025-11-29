@@ -257,3 +257,21 @@ label:focus {
 #privacy-item.audio-out {
     background-color: #0069d4;
 }
+
+/* Conteudo de ~/.config/waybar/style.css */
+
+/* Estilo para quando o MODO CONSERVAÇÃO esta LIGADO */
+#custom-conservation.conservation-on {
+    color: #ABE9B3; /* Verde claro (indicando que a bateria esta 'protegida') */
+}
+
+/* Estilo para quando o MODO CONSERVAÇÃO esta DESLIGADO */
+#custom-conservation.conservation-off {
+    color: #F28FAD; /* Vermelho/Rosa (indicando carregamento total, que estressa a bateria) */
+}
+
+/* Estilo padrao para o modulo */
+#custom-conservation {
+    margin-right: 10px;
+    padding: 0 10px;
+}

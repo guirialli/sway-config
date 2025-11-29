@@ -1,0 +1,8 @@
+# Teclado em PTBR
+input type:keyboard {
+    xkb_layout "br"
+    xkb_variant "abnt2"
+}
+
+# You can also configure each device individually.
+# Read `man 5 sway-input` for more information about this section.

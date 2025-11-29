@@ -1,0 +1,40 @@
+# Ativa cantos arredondados (valor em pixels)
+corner_radius 5
+
+
+# Shadows
+# Define o raio do desfoque da sombra (mais suave = valor maior)
+shadow_blur_radius 15
+
+# Define a cor e a opacidade da sombra (RGB + Canal Alpha)
+# Exemplo: Preto (000000) com 50% de opacidade (7F)
+shadow_color #0000007F
+# Define o deslocamento da sombra (x e y)
+shadow_offset 6 6
+# Define cor para janelas inativas
+shadow_inactive_color #00000055
+
+# blur
+# Ativa o desfoque
+blur enable
+# Define o numero de 'passagens' de desfoque (maior = mais intenso/lento)
+blur_passes 3
+# Define o raio do desfoque
+blur_radius 6
+# Define o nivel de ruido (float 0.0 a 1.0)
+blur_noise 0.05
+# Define se o desfoque deve desconsiderar janelas transparentes abaixo
+blur_xray disable
+
+# Aplica efeitos na camada do Waybar (precisa do Waybar reiniciado)
+layer_effects "waybar" {
+    blur enable;
+    corner_radius 8;
+    shadows enable;
+}
+
+# Aplica cantos arredondados no daemon de notificacoes Mako
+layer_effects "mako" {
+    corner_radius 10;
+    shadows enable;
+}

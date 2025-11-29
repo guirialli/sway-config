@@ -1,0 +1,28 @@
+# --- Cores (Dark Mode) ---
+
+# Fundo escuro (cor principal do seu tema Adwaita Dark/Waybar)
+background-color=#1e1e2e
+
+# Cor da borda
+border-color=#f5c2e7
+
+# Cor da frente/texto
+text-color=#d9e0ee
+
+# --- Layout e Posicao ---
+
+# Posiciona as notificacoes no canto superior direito (tr = top-right)
+# Outras opcoes: bl, br, tl, tr, bottom, top, left, right
+anchor=top-right
+
+# Deslocamento da borda (pixels)
+default-timeout=5000
+width=350
+height=100
+margin=10
+padding=10
+border-size=1
+
+# Fontes
+font=sans-serif 10
+

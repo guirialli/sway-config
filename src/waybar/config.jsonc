@@ -25,6 +25,7 @@
         "backlight",
         "sway/language",
         "battery",
+	"custom/conservation",
         "clock",
         "tray"
     ],
@@ -147,6 +148,13 @@
     },
     "battery#bat2": {
         "bat": "BAT2"
+    },
+    "custom/conservation": {
+    	"format": "{}",
+    	"interval": 2, // Verifica o estado a cada 5 segundos
+    	"return-type": "json",
+    	"exec": "~/.config/waybar/scripts/conservation-status.sh", // Script para verificar o estado
+    	"on-click": "pkexec --user root ~/sway-config/src/waybar/scripts/toggle-conservation.sh" // Script para alternar ao clicar
     },
     "power-profiles-daemon": {
       "format": "{icon}",

@@ -1,0 +1,12 @@
+
+exec waybar
+# Inicia o agente de autenticacao Polkit para janelas graficas de senha
+exec /usr/bin/lxqt-policykit-agent &
+
+# Blueman
+exec blueman-applet &
+
+# Mako
+exec mako &
+
+exec nm-applet --indicator &
