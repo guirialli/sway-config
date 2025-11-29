@@ -38,3 +38,12 @@ layer_effects "mako" {
     corner_radius 10;
     shadows enable;
 }
+
+
+
+
+# 3. Desligar o desfoque para o Ulauncher (se o blur global estiver ligado)
+layer_effects "ulauncher" {
+    blur disable;
+}
+
