@@ -3,15 +3,14 @@ exec waybar
 # Inicia o agente de autenticacao Polkit para janelas graficas de senha
 exec /usr/bin/lxqt-policykit-agent &
 
+
+#Applets
 # Blueman
 exec blueman-applet &
-
 # Mako
 exec mako &
-
 # Wifi
 exec nm-applet --indicator &
-
 # Idle
 exec $HOME/.config/waybar/scripts/toggle_idle.sh
 
@@ -23,3 +22,9 @@ exec --no-startup-id /usr/lib/xdg-desktop-portal-gtk &
 exec --no-startup-id /usr/lib/xdg-desktop-portal &
 
 exec ulauncher
+
+
+#Keyring
+exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+

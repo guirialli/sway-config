@@ -139,10 +139,12 @@ bindsym Print exec grim
 bindsym $mod+SHIFT+b exec blueman-manager
 # Ulancher
 bindsym $mod+space exec ulauncher-toggle
+# Swayidle
+bindsym $mod+Ctrl+s exec bash -c "~/sway-config/src/waybar/scripts/toggle_idle.sh"
 
 
 #My Peronsal keybinds
-#Chorme
 bindsym $mod+g exec google-chrome-stable
 bindsym $mod+SHIFT+e exec nautilus
+bindsym $mod+SHIFT+v exec code 
 
