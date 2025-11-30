@@ -13,7 +13,7 @@ default_border pixel 3
 
 # 2. Cores da Borda
 # --- Bordas Focadas (Roxo Escuro) ---
-client.focused #9A67EA #9A67EA #9A67EA #9A67EA
-client.unfocused #4C4C4C #4C4C4C #4C4C4C #4C4C4C
-client.focused_inactive #4C4C4C #4C4C4C #4C4C4C #4C4C4C
+client.focused #9A67EA #9A67EA #FFFFFF #9A67EA
+client.unfocused #4C4C4C #4C4C4C #CCCCCC #4C4C4C
+client.focused_inactive #4C4C4C #4C4C4C #CCCCCC #4C4C4C
 
