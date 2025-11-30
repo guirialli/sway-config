@@ -147,6 +147,8 @@ bindsym $mod+Ctrl+a exec pavucontrol
 bindsym Print exec ~/.config/sway/scripts/screen_shoot.sh -g
 bindsym $mod+ALT+s exec ~/.config/sway/scripts/screen_shoot.sh -s
 bindsym $mod+ALT+w exec ~/.config/sway/scripts/screen_shoot.sh -w
+#Clipboard
+bindsym $mod+c exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
 
 
 

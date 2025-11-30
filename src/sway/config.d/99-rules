@@ -5,6 +5,8 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set 800
 
 for_window [app_id="blueman-manager"] floating enable, resize set 800 600, move to center
 
-for_window [app_id="ulauncher"] floating enable, border pixel 0, move position center
-for_window [app_id="toggle_brightness_popup.py"] floating enable, border pixel 0, move position center, resize set 500 10
-for_window [app_id="org.gnome.Calculator"] floating enable, border pixel 0, move position center, resize set 400 400
+for_window [app_id="ulauncher"] floating enable, move position center
+for_window [app_id="toggle_brightness_popup.py"] floating enable, move position center, resize set 500 10
+for_window [app_id="org.gnome.Calculator"] floating enable, move position center, resize set 400 400
+
+for_window [app_id="com.rtosta.zapzap"] floating enable, move position center, resize set 1400 1000

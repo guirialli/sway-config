@@ -5,22 +5,18 @@ exec /usr/bin/lxqt-policykit-agent &
 
 
 #Applets
-# Blueman
 exec blueman-applet &
-# Mako
 exec mako &
-# Wifi
 exec nm-applet --indicator &
-# Idle
 exec $HOME/.config/waybar/scripts/toggle_idle.sh
-
-
+exec wl-paste --watch cliphist store
 
 # Portals
 exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr & 
 exec --no-startup-id /usr/lib/xdg-desktop-portal-gtk & 
 exec --no-startup-id /usr/lib/xdg-desktop-portal &
 
+# Applications
 exec ulauncher
 
 

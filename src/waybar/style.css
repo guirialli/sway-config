@@ -273,3 +273,12 @@ button {
 .menu-shutdown {
     color: #e74c3c; 
 }
+
+
+/*Clipboard*/
+
+#custom-clipboard {
+	padding: 0 10px;
+	color: #fff
+}
+
