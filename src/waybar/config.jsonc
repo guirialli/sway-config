@@ -64,7 +64,8 @@
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
+        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
+	"on-click": "~/.config/waybar/scripts/toggle_brightness_popup.py"
     },
     "battery": {
         "states": {
@@ -137,7 +138,7 @@
        "menu-file": "~/.config/waybar/xml/power_menu.xml",
        "menu-actions":{
        	    "reboot": "systemctl reboot",
-	    "shutdown": "systemctl shutdown",
+	    "shutdown": "systemctl poweroff",
 	    "suspend": "systemctl suspend",
 	    "logout": "swaymsg exit"
        }
