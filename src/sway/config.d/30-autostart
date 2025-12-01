@@ -8,7 +8,7 @@ exec /usr/bin/lxqt-policykit-agent &
 exec blueman-applet &
 exec mako &
 exec nm-applet --indicator &
-exec $HOME/.config/waybar/scripts/toggle_idle.sh
+exec $HOME/.config/waybar/scripts/toggle_idle.sh -s 
 exec wl-paste --watch cliphist store
 
 # Portals

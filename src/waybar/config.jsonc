@@ -12,7 +12,6 @@
         "sway/scratchpad"
     ],
     "modules-center": [
-        "sway/window"
     ],
     "modules-right": [
 	"custom/clipboard",

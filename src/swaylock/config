@@ -1,0 +1,41 @@
+# ----------------------------------------------------
+# VISUAL
+# ----------------------------------------------------
+screenshots
+# Aumentei o blur para um efeito mais "vidro" e esmaecido, como telas de HUD
+effect-blur=15x7 
+clock
+indicator-caps-lock
+show-failed-attempts
+
+# ----------------------------------------------------
+# CORES DO INDICADOR (Anel/Círculo) - Tema Roxo Cyberpunk
+# Formato: RRGGBBAA (Reds, Greens, Blues, Alpha)
+# ----------------------------------------------------
+# Cor do anel em estado normal/ocioso (Roxo Elétrico Profundo)
+ring-color=6C238Eff
+# Cor dentro do anel (Fundo Roxo Escuro quase preto, transparente)
+inside-color=1A0A28aa
+# Cor do anel quando a senha está incorreta (Vermelho Neon para erro)
+ring-wrong-color=FF3333ff
+# Cor dentro do anel com senha incorreta
+inside-wrong-color=1A0A28aa
+
+# ----------------------------------------------------
+# CORES DO TEXTO
+# ----------------------------------------------------
+# Cor do texto do relógio e da senha (Verde-limão Neon para alto contraste)
+text-color=C3E88Dff
+# Cor do texto do indicador Caps Lock (Ciano Elétrico)
+text-caps-lock-color=00BCD4ff
+# Cor do anel com Caps Lock ativo (Ciano Elétrico)
+ring-caps-lock-color=00BCD4ff
+# Cor dentro do anel com Caps Lock ativo
+inside-caps-lock-color=1A0A28aa
+
+# ----------------------------------------------------
+# LAYOUT E FONTE
+# ----------------------------------------------------
+# Ex: "Hack Nerd Font", "Fira Code", "Terminus"
+font=MesloLGS NF
+font-size=30

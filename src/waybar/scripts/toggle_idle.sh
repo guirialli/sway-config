@@ -1,26 +1,36 @@
 #!/bin/bash
 
 STATE_FILE="$HOME/.cache/swayidle_enabled"
+TIMEOUT_LOCK=$((3*60))
+TIMEOUT_SLEEP=$((5*60))
 
-# Estado inicial: suspensão ATIVADA
 if [ ! -f "$STATE_FILE" ]; then
     echo "off" > "$STATE_FILE"
 fi
 
 STATE=$(cat "$STATE_FILE")
 
+if [[ "$1" = "-s" ]]; then
+     STATE="off"
+fi
+
+
+killall swayidle
 if [ "$STATE" = "on" ]; then
     # DESATIVAR suspensão
-    killall swayidle
     echo "off" > "$STATE_FILE"
-    notify-send "Supensão desativada!"
+    MESSAGE="Supensão desativada!"
 else
-    # ATIVAR suspensão
     swayidle -w \
-    	timeout 300 'swaylock -f' \
-    	timeout 600 'swaymsg "output * dpms off"' \
+    	timeout "$TIMEOUT_LOCK" 'swaylock -f' \
+    	timeout "$TIMEOUT_SLEEP" 'swaymsg "output * dpms off"' \
     	resume 'swaymsg "output * dpms on"' \
     	before-sleep 'swaylock -f' &
     echo "on" > "$STATE_FILE"
-    notify-send "Supensão ativa!"
+    MESSAGE="Supensão ativada!"
 fi
+
+if [[ ! "$1" = '-s' ]]; then
+    notify-send "$MESSAGE"
+fi
+
