@@ -139,6 +139,7 @@ bindsym $mod+SHIFT+b exec blueman-manager
 bindsym $mod+space exec ulauncher-toggle
 # Swayidle
 bindsym $mod+Ctrl+s exec bash -c "~/sway-config/src/waybar/scripts/toggle_idle.sh"
+bindsym $mod+Ctrl+l exec bash -c "~/sway-config/src/waybar/scripts/toggle_idle.sh -n"
 # Brigth
 bindsym $mod+Ctrl+b exec ~/.config/waybar/scripts/toggle_brightness_popup.py
 # Pavucontrol

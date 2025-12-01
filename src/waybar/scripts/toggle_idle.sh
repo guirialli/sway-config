@@ -12,12 +12,20 @@ STATE=$(cat "$STATE_FILE")
 
 if [[ "$1" = "-s" ]]; then
      STATE="off"
+elif [[ "$1" = "-n" ]]; then
+    systemctl suspend
+    STATE="off"
+elif [[ "$1" = '-r' ]]; then
+    if [[ "$STATE" = "on" ]]; then
+        STATE="off"
+    else 
+        STATE="on"	    
+   fi
 fi
 
 
-killall swayidle
+killall -q swayidle
 if [ "$STATE" = "on" ]; then
-    # DESATIVAR suspensão
     echo "off" > "$STATE_FILE"
     MESSAGE="Supensão desativada!"
 else

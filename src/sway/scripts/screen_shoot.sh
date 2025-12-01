@@ -5,6 +5,7 @@ PICTURE_DIR=$(xdg-user-dir PICTURES)
 FOLDER="$PICTURE_DIR/screeshots"
 FILE="$FOLDER/screenshot_$(date +%F_%T).png"
 VALID_MODE=("-s" "-g" "-w")
+ACTION=""
 
 # Tratnado os parametros
 if [ -z $1 ]; then
@@ -12,6 +13,7 @@ if [ -z $1 ]; then
 fi
 
 found=false
+
 for item in "${VALID_MODE[@]}"; do
 	if [[ "$item" == "$MODE" ]]; then
 		found=true
@@ -31,11 +33,15 @@ fi
 mkdir -p $FOLDER
 if [[ "$MODE" = -g ]]; then
     grim -g "$(slurp)" "$FILE" 
+    ACTION="da área selecionada"
 elif [[ "$MODE" = -w ]]; then
-	grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).rect | "\(.x),\(.y) \(.width)x\(.height)"')" "$FILE"
+   grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true).rect | "\(.x),\(.y) \(.width)x\(.height)"')" "$FILE"
+    ACTION="da janela"
 
 elif [[ "$MODE" = -s ]]; then
-	grim -g "$(slurp -o)" "$FILE"
+    grim -g "$(slurp -o)" "$FILE"
+    ACTION="da janela"
 fi
 
 wl-copy < $FILE
+notify-send "Caputra $ACTION salva em $FILE"
