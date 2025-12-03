@@ -209,23 +209,6 @@ button {
     padding: 0 15px 0 10px
 }
 
-/* Estado ATIVO (Suspensão OK) */
-#custom-idle.idle-on {
-    color: #4CAF50;
-    background-color: #2e432f;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-/* Estado DESATIVADO (Suspensão desligada - Alerta) */
-#custom-idle.idle-off {
-    color: #FF5733;
-    background-color: #472b25;
-    border-radius: 4px;
-    font-style: italic;
-    animation: pulse 1s infinite alternate;
-}
-
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(255, 87, 51, 0.5);

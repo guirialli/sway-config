@@ -11,3 +11,4 @@ for_window [app_id="org.gnome.Calculator"] floating enable, move position center
 
 for_window [app_id="com.rtosta.zapzap"] floating enable, move position center, resize set 1400 1000
 for_window [class="steam"] floating enable, move position center
+for_window [app_id="org.gnome.Calendar"] floating enable, move position center

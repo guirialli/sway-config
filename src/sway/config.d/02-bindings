@@ -150,7 +150,7 @@ bindsym $mod+ALT+s exec ~/.config/sway/scripts/screen_shoot.sh -s
 bindsym $mod+ALT+w exec ~/.config/sway/scripts/screen_shoot.sh -w
 #Clipboard
 bindsym $mod+c exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
-
+bindsym $mod+ALT+q exec ~/sway-config/src/sway/scripts/power-toggle.sh
 
 
 #My Peronsal keybinds
@@ -161,4 +161,4 @@ bindsym $mod+SHIFT+s exec steam
 bindsym $mod+SHIFT+r exec remmina
 bindsym $mod+SHIFT+w exec bottles
 bindsym $mod+SHIFT+p exec heroic
-
+bindsym $mod+SHIFT+z exec flatpak run com.rtosta.zapzap

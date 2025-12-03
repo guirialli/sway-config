@@ -12,18 +12,14 @@
         "sway/scratchpad"
     ],
     "modules-center": [
+        "clock",
+        "custom/idle"
     ],
     "modules-right": [
-	"custom/clipboard",
-        "custom/idle",
-        "pulseaudio",
-        "network",
+	"pulseaudio",
         "power-profiles-daemon",
-        "backlight",
-        "sway/language",
         "battery",
 	"custom/conservation",
-        "clock",
         "tray",
 	"custom/power"
     ],
