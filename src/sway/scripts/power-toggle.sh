@@ -3,6 +3,7 @@
 
 PROFILE_ACTIVE=$(powerprofilesctl get)
 PROFILES=("power-saver" "balanced" "performance")
+PROFILES_NAME=("economia de energia" "equilibrado"  "desempenho máximo")
 LENGTH=${#PROFILES[@]}
 
 current=0
@@ -37,4 +38,4 @@ if [[ "$current" = "$LENGTH" ]]; then
 fi
 
 powerprofilesctl set "${PROFILES[current]}"
-notify-send "${PROFILES[current]} setado"
+notify-send "${PROFILES_NAME[current]} setado"

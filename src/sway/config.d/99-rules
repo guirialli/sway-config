@@ -1,7 +1,7 @@
 # Torna a janela do agente Polkit do LXQt sempre flutuante e centralizada
 for_window [app_id="lxqt-policykit-agent"] floating enable, resize set 600 400, move to center
 
-for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set 800 600, move to center
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set 1200 900, move to center
 
 for_window [app_id="blueman-manager"] floating enable, resize set 800 600, move to center
 
@@ -12,3 +12,8 @@ for_window [app_id="org.gnome.Calculator"] floating enable, move position center
 for_window [app_id="com.rtosta.zapzap"] floating enable, move position center, resize set 1400 1000
 for_window [class="steam"] floating enable, move position center
 for_window [app_id="org.gnome.Calendar"] floating enable, move position center
+
+
+#Dev
+for_window [app_id="glade-previewer"] floating enable, move position center
+for_window [class="Emulator"] floating enable

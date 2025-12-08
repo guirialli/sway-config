@@ -12,12 +12,12 @@
         "sway/scratchpad"
     ],
     "modules-center": [
-        "clock",
+        "custom/calendar",
         "custom/idle"
     ],
     "modules-right": [
 	"pulseaudio",
-        "power-profiles-daemon",
+        "custom/power-tlp",
         "battery",
 	"custom/conservation",
         "tray",
@@ -60,7 +60,7 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:$d/%m/%y}"
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -143,5 +143,19 @@
 	    "suspend": "systemctl suspend",
 	    "logout": "swaymsg exit"
        }
+   },
+   "custom/calendar": {
+     "return-type": "json",
+     "exec" : "~/.config/waybar/scripts/calendar.sh",
+     "on-click": "gnome-calendar",
+     "interval": 1,
+     "tooltip": true
+   },
+   "custom/power-tlp": {
+     "return-type": "json",
+     "exec" : "~/.config/waybar/scripts/power-status.sh",
+     "on-click": "~/.config/sway/scripts/power-toggle.sh",
+     "interval": 5,
+     "tooltip": true
    }
 }

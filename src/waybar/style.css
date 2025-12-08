@@ -54,6 +54,7 @@ window#waybar.chromium {
 #keyboard-state,
 #custom-idle,
 #custom-conservation,
+#custom-power-tlp,
 #mode,
 #scratchpad {
     padding: 0 10px;
@@ -83,6 +84,8 @@ button {
 #custom-idle:hover,
 #custom-conservation:hover,
 #mode:hover,
+#custom-power-tlp:hover,
+#custom-calendar:hover,
 #scratchpad:hover {
     background-color: rgba(138, 43, 226, 0.25); /* Roxo mais visível no hover */
     border-radius: 6px;
@@ -265,3 +268,9 @@ button {
 	color: #fff
 }
 
+
+/*Calendario*/
+
+#custom-calendar {
+   padding: 0 10px;
+}
