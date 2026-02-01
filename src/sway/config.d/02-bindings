@@ -4,13 +4,13 @@
 bindsym $mod+Return exec $term
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # Start your launcher
 bindsym $mod+d exec $menu
 
 # Reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Ctrl+r reload
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+m exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -157,9 +157,10 @@ bindsym $mod+ALT+q exec ~/sway-config/src/sway/scripts/power-toggle.sh
 #My Peronsal keybinds
 bindsym $mod+g exec google-chrome-stable
 bindsym $mod+SHIFT+e exec nautilus
-bindsym $mod+SHIFT+v exec code --ozone-platform=wayland 
+bindsym $mod+SHIFT+c exec code --ozone-platform=wayland 
 bindsym $mod+SHIFT+r exec remmina
 bindsym $mod+SHIFT+w exec bottles
-bindsym $mod+SHIFT+p exec heroic
-bindsym $mod+SHIFT+z exec flatpak run com.rtosta.zapzap
-bindsym $mod+ALT+v exec steam
+bindsym $mod+SHIFT+z exec zapzap
+bindsym $mod+SHIFT+p exec steam
+bindsym $mod+SHIFT+v exec vesktop
+bindsym $mod+SHIFT+d exec discord

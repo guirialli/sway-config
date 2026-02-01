@@ -1,51 +1,108 @@
-#!/usr/bin/python3
-import gi
+#!/usr/bin/env python3
+import sys
 import subprocess
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QWidget, QSlider, QHBoxLayout
+import threading
 
-def get_brightness():
-    cur = int(subprocess.check_output(["brightnessctl", "g"]))
-    maxv = int(subprocess.check_output(["brightnessctl", "m"]))
-    return int(cur * 100 / maxv)
+def get_brightness_cmd(cmd):
+    """Auxiliar para rodar comandos do brightnessctl"""
+    try:
+        return int(subprocess.check_output(["brightnessctl", cmd]).strip())
+    except Exception:
+        return 0
 
-class Popup(Gtk.Window):
+def get_current_percentage():
+    cur = get_brightness_cmd("g")
+    maxv = get_brightness_cmd("m")
+    if maxv == 0: return 0
+    return int((cur * 100) / maxv)
+
+class BrightnessPopup(QWidget):
     def __init__(self):
-        super().__init__(type=Gtk.WindowType.POPUP)
-        self.set_default_size(300, 50)
-        self.set_decorated(False)
-        self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        super().__init__()
 
-        # fundo transparente opcional
-        screen = self.get_screen()
-        visual = screen.get_rgba_visual()
-        if visual and self.is_composited():
-            self.set_visual(visual)
-        self.set_app_paintable(True)
+        # --- Configurações da Janela ---
+        # Remove a barra de título e bordas
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.Tool)
+        # Permite fundo transparente (para bordas arredondadas funcionarem visualmente)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+        
+        # Tamanho fixo
+        self.setFixedSize(320, 60)
 
-        box = Gtk.Box(spacing=10)
-        box.set_border_width(10)
-        self.add(box)
+        # --- Layout e Widgets ---
+        layout = QHBoxLayout()
+        layout.setContentsMargins(15, 10, 15, 10) # Margens internas
 
-        self.scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1)
-        self.scale.set_value(get_brightness())
-        self.scale.set_draw_value(False)
-        self.scale.connect("value-changed", self.on_change)
-        self.scale.connect("button-release-event", self.on_release)
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.setRange(1, 100)
+        self.slider.setValue(get_current_percentage())
+        
+        # Conecta os sinais (eventos)
+        self.slider.valueChanged.connect(self.set_brightness)
+        self.slider.sliderReleased.connect(self.close_app) # Fecha ao soltar o mouse
 
-        box.pack_start(self.scale, True, True, 0)
+        layout.addWidget(self.slider)
+        self.setLayout(layout)
 
-    def on_change(self, widget):
-        val = int(widget.get_value())
-        if val < 1:
-            val = 1
-        elif val > 100:
-            val = 100
-        subprocess.run(["brightnessctl", "set", f"{val}%"])
+        # --- Estilização (CSS/QSS) ---
+        # Aqui definimos a cor de fundo escura e o estilo do slider
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #1e1e2e; /* Cor escura (estilo Catppuccin/Astronaut) */
+                border: 2px solid #89b4fa; /* Borda azulada */
+                border-radius: 15px;
+            }
+            QSlider::groove:horizontal {
+                border: 1px solid #313244;
+                height: 8px;
+                background: #45475a;
+                margin: 2px 0;
+                border-radius: 4px;
+            }
+            QSlider::handle:horizontal {
+                background: #89b4fa;
+                border: 1px solid #89b4fa;
+                width: 18px;
+                height: 18px;
+                margin: -5px 0;
+                border-radius: 9px;
+            }
+        """)
 
-    def on_release(self, *args):
-        Gtk.main_quit()
+        # Tenta centralizar na tela ativa
+        self.center_on_screen()
 
-Popup().show_all()
-Gtk.main()
+    def center_on_screen(self):
+        screen = QApplication.primaryScreen()
+        if screen:
+            rect = screen.availableGeometry()
+            center_point = rect.center()
+            frame_geom = self.frameGeometry()
+            frame_geom.moveCenter(center_point)
+            self.move(frame_geom.topLeft())
 
+    def set_brightness(self, value):
+        # Chama o brightnessctl
+        self.brilho = value
+        subprocess.run(["brightnessctl", "set", f"{value}%"])
+
+    def set_brightnes_ext_monitor(self, value):
+        if value != 100:
+            value -= 3
+        if value <= 0:
+            value = 1
+
+        subprocess.run(["ddcutil", "setvcp", "10", f"{value}", "--bus=6", "--noverify"])
+
+    def close_app(self):
+        # Fecha o aplicativo suavemente
+        self.close()
+        self.set_brightnes_ext_monitor(self.brilho)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = BrightnessPopup()
+    window.show()
+    sys.exit(app.exec())
