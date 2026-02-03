@@ -17,6 +17,7 @@
     ],
     "modules-right": [
 	"pulseaudio",
+	"custom/theme",
         "custom/power-tlp",
         "battery",
 	"custom/conservation",
@@ -143,6 +144,12 @@
 	    "suspend": "systemctl suspend",
 	    "logout": "swaymsg exit"
        }
+   },
+   "custom/theme": {
+      "interval": 2,
+      "return-type": "json",
+      "exec": "~/.config/waybar/scripts/theme.sh",
+      "on-click": "~/.config/waybar/scripts/toggle-theme.sh"
    },
    "custom/calendar": {
      "return-type": "json",

@@ -1,7 +1,7 @@
 
 
 # Default monitor options
-output eDP-1 pos 0 0 scale 1.15
+output eDP-1 pos 0 0 scale 1.15 
 output HDMI-A-1 pos 1670 0 scale 1.00 mode 1920x1080@74.973Hz
 
 ### Output configuration

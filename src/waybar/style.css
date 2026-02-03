@@ -86,6 +86,7 @@ button {
 #mode:hover,
 #custom-power-tlp:hover,
 #custom-calendar:hover,
+#custom-theme:hover,
 #scratchpad:hover {
     background-color: rgba(138, 43, 226, 0.25); /* Roxo mais visível no hover */
     border-radius: 6px;
@@ -254,6 +255,11 @@ button {
 .menu-logout {
     padding: 5px 10px;
     font-weight: bold;
+}
+
+.theme-dark,
+.theme-light {
+  color: #fff;
 }
 
 .menu-shutdown {

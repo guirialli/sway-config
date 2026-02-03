@@ -156,7 +156,7 @@ bindsym $mod+ALT+q exec ~/sway-config/src/sway/scripts/power-toggle.sh
 
 #My Peronsal keybinds
 bindsym $mod+g exec google-chrome-stable
-bindsym $mod+SHIFT+e exec nautilus
+bindsym $mod+SHIFT+e exec nautilus 
 bindsym $mod+SHIFT+c exec code --ozone-platform=wayland 
 bindsym $mod+SHIFT+r exec remmina
 bindsym $mod+SHIFT+w exec bottles

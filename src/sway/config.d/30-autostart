@@ -18,11 +18,13 @@ exec --no-startup-id /usr/lib/xdg-desktop-portal &
 
 # Applications
 exec ulauncher
+exec autotiling
 
 
 #Keyring
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec systemctl --user start  polkit-gnome-authentication-agent-1.service
 
 
 exec gammastep -l -13.85:-40.08 -t 6500:3500

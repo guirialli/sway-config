@@ -90,7 +90,7 @@ class BrightnessPopup(QWidget):
 
     def set_brightnes_ext_monitor(self, value):
         if value != 100:
-            value -= 3
+            value -= 10
         if value <= 0:
             value = 1
 

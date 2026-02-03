@@ -1,5 +1,4 @@
+#!/bin/bash
+TEXTO=$(date +'%a %-d de %b, %H:%M')
 
-HORA=$(date +'%H:%M')
-DIA=$(date +'%d/%m/%Y')
-
-echo "{\"text\": \"$HORA\", \"tooltip\": \"$DIA\"}"
+echo "{\"text\": \"$TEXTO\"}"
