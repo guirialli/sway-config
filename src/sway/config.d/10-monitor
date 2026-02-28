@@ -1,8 +1,8 @@
 
 
 # Default monitor options
-output eDP-1 pos 0 0 scale 1.15 
-output HDMI-A-1 pos 1670 0 scale 1.00 mode 1920x1080@74.973Hz
+output eDP-1 pos 0 0 scale 1.20 
+output HDMI-A-1 pos 1600 0 scale 1.00 mode 1920x1080@74.973Hz
 
 ### Output configuration
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)

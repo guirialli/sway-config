@@ -1,5 +1,8 @@
 # Teclado em PTBR
 input type:keyboard {
+    #xkb_layout "br"
+    #xkb_variant "abnt2"
+
     xkb_layout "us"
     xkb_variant "intl"
 }

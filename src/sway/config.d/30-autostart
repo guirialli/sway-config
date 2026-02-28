@@ -15,6 +15,7 @@ exec wl-paste --watch cliphist store
 exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr & 
 exec --no-startup-id /usr/lib/xdg-desktop-portal-gtk & 
 exec --no-startup-id /usr/lib/xdg-desktop-portal &
+exec --no-startup-id ~/.config/sway/scripts/monitor-swap.py -d & 
 
 # Applications
 exec ulauncher

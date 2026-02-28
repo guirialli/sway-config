@@ -21,3 +21,7 @@ for_window [app_id="org.gnome.Calendar"] floating enable, move position center
 #Dev
 for_window [app_id="glade-previewer"] floating enable, move position center
 for_window [class="Emulator"] floating enable
+
+
+# System
+for_window [title="SwayDisplaySwitcher"] floating enable, move position center, sticky enable, focus

@@ -3,7 +3,8 @@ import sys
 import subprocess
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QWidget, QSlider, QHBoxLayout
-import threading
+from PySide6.QtGui import QKeyEvent
+
 
 def get_brightness_cmd(cmd):
     """Auxiliar para rodar comandos do brightnessctl"""
@@ -12,11 +13,14 @@ def get_brightness_cmd(cmd):
     except Exception:
         return 0
 
+
 def get_current_percentage():
     cur = get_brightness_cmd("g")
     maxv = get_brightness_cmd("m")
-    if maxv == 0: return 0
+    if maxv == 0:
+        return 0
     return int((cur * 100) / maxv)
+
 
 class BrightnessPopup(QWidget):
     def __init__(self):
@@ -27,21 +31,21 @@ class BrightnessPopup(QWidget):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.Tool)
         # Permite fundo transparente (para bordas arredondadas funcionarem visualmente)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        
+
         # Tamanho fixo
         self.setFixedSize(320, 60)
 
         # --- Layout e Widgets ---
         layout = QHBoxLayout()
-        layout.setContentsMargins(15, 10, 15, 10) # Margens internas
+        layout.setContentsMargins(15, 10, 15, 10)  # Margens internas
 
         self.slider = QSlider(Qt.Horizontal)
         self.slider.setRange(1, 100)
         self.slider.setValue(get_current_percentage())
-        
+
         # Conecta os sinais (eventos)
         self.slider.valueChanged.connect(self.set_brightness)
-        self.slider.sliderReleased.connect(self.close_app) # Fecha ao soltar o mouse
+        self.slider.sliderReleased.connect(self.close_app)  # Fecha ao soltar o mouse
 
         layout.addWidget(self.slider)
         self.setLayout(layout)
@@ -100,6 +104,13 @@ class BrightnessPopup(QWidget):
         # Fecha o aplicativo suavemente
         self.close()
         self.set_brightnes_ext_monitor(self.brilho)
+
+    def keyPressEvent(self, event: QKeyEvent, /) -> None:
+        if event.key() == Qt.Key.Key_Escape:
+            self.close()
+        else:
+            return super().keyPressEvent(event)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

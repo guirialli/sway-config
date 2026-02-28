@@ -90,6 +90,9 @@ bindsym $mod+Shift+space focus mode_toggle
 # Move focus to the parent container
 bindsym $mod+a focus parent
 
+# Change Monitor
+bindsym $mod+p exec ~/.config/sway/scripts/monitor-swap.py
+
 
 # Scratchpad:
 # Move the currently focused window to the scratchpad
