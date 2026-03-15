@@ -8,33 +8,66 @@ import sys
 QT_QPA_PLATFORM = "wayland"
 
 
-def gerenciar_volume(acao: str) -> list[float | bool]:
-    if acao == "up":
-        subprocess.run(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+"])
-    elif acao == "down":
-        subprocess.run(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-"])
-    elif acao == "mute":
-        print("")
+class MixerService:
+    @classmethod
+    def _get_status(cls):
+        resultado = subprocess.run(
+            ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"],
+            text=True,
+            capture_output=True,
+        )
+
+        return resultado.stdout.strip()
+
+    @classmethod
+    def get_is_muted(cls) -> bool:
+        saida = cls._get_status()
+        return "[MUTED]" in saida
+
+    @classmethod
+    def get_volume(cls) -> float:
+        saida = cls._get_status()
+        volume = 0.0
+        for palava in saida.split():
+            try:
+                volume = float(palava) * 100
+                break
+            except Exception:
+                continue
+
+        return volume
+
+    @classmethod
+    # percent deve seguir o padrão do wpctl usando 5%+ por exemplo para aumentar 5 porcento
+    # Ou 5%- para reduzir 5 porcento
+    def set_volume(cls, percent: str):
+        subprocess.run(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", percent])
+
+    @classmethod
+    def toggle_volume_muted(cls):
         subprocess.run(["wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle"])
 
-    resultado = subprocess.run(
-        ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"],
-        text=True,
-        capture_output=True,
-    )
 
-    saida = resultado.stdout.strip()
-    is_muted = "[MUTED]" in saida
-    volume = 0.0
+class MixerController:
+    @classmethod
+    def gerenciar_volume(cls, acao: str) -> list[float | bool]:
+        if acao != "mute" and MixerService.get_is_muted():
+            MixerService.toggle_volume_muted()
 
-    for palava in saida.split():
-        try:
-            volume = float(palava) * 100
-            break
-        except Exception:
-            continue
+        if acao == "up":
+            volume = MixerService.get_volume()
+            if volume >= 100:
+                return [volume, MixerService.get_is_muted()]
+            MixerService.set_volume("5%+")
+        elif acao == "down":
+            MixerService.set_volume("5%-")
+        elif acao == "mute":
+            MixerService.toggle_volume_muted()
 
-    return [volume, is_muted]
+        volume = MixerService.get_volume()
+        is_muted = MixerService.get_is_muted()
+
+        return [volume, is_muted]
 
 
 class OSDVolume(QWidget):
@@ -65,13 +98,14 @@ class OSDVolume(QWidget):
                 color: transparent;
             }
             QProgressBar::chunk {
-                background-color: #77aaff;
+                background-color: #9A67EA ;
                 border-radius: 3px;
             }
             QLabel {
                 color: #ffffff;
                 font-family: sans-serif;
                 font-weight: bold;
+                font-size: 30px;
                 background: transparent;
             }
         """)
@@ -88,14 +122,14 @@ class OSDVolume(QWidget):
         self.bar.setTextVisible(False)
         layout.addWidget(self.bar)
 
-        QTimer.singleShot(1000, QApplication.quit)
+        QTimer.singleShot(900, QApplication.quit)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    acao = sys.argv[1] if len(sys.argv) else ""
+    acao = sys.argv[1] if len(sys.argv) > 1 else ""
 
-    volume, is_muted = gerenciar_volume(acao)
+    volume, is_muted = MixerController.gerenciar_volume(acao)
 
     janela = OSDVolume(volume, bool(is_muted))
     janela.setWindowTitle("OSD Volume")

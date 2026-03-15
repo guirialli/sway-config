@@ -35,3 +35,8 @@ for_window [app_id="sway.osd.volume"] floating enable
 for_window [app_id="sway.osd.volume"] border none
 for_window [app_id="sway.osd.volume"] sticky enable
 for_window [app_id="sway.osd.volume"] move position center
+
+for_window [app_id="sway.osd.brightness"] floating enable
+for_window [app_id="sway.osd.brightness"] border none
+for_window [app_id="sway.osd.brightness"] sticky enable
+for_window [app_id="sway.osd.brightness"] move position center
