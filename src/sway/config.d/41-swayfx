@@ -1,5 +1,6 @@
 # Ativa cantos arredondados (valor em pixels)
 corner_radius 5
+shadows enable
 
 
 # Shadows
@@ -18,13 +19,16 @@ shadow_inactive_color #00000055
 # Ativa o desfoque
 blur enable
 # Define o numero de 'passagens' de desfoque (maior = mais intenso/lento)
-blur_passes 3
+blur_passes 4
 # Define o raio do desfoque
-blur_radius 6
+blur_radius 10
 # Define o nivel de ruido (float 0.0 a 1.0)
 blur_noise 0.05
+blur_brightness 0.8
+blur_contrast 1.2
 # Define se o desfoque deve desconsiderar janelas transparentes abaixo
-blur_xray disable
+
+#blur_xray disable
 
 # Aplica efeitos na camada do Waybar (precisa do Waybar reiniciado)
 layer_effects "waybar" {

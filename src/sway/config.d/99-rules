@@ -17,11 +17,21 @@ for_window [app_id="discord"] floating enable, move position center, resize set 
 for_window [class="steam"] floating enable, move position center
 for_window [app_id="org.gnome.Calendar"] floating enable, move position center
 
-
+for_window [title="Autenticação"] floating enable
+for_window [title="Authentication"] floating enable
+for_window [title="PolicyKit1 Authentication Agent"] floating enable
 #Dev
 for_window [app_id="glade-previewer"] floating enable, move position center
 for_window [class="Emulator"] floating enable
 
+for_window [title="ZapZap"] floating enable, resize set 1200 720, move position center
+
 
 # System
 for_window [title="SwayDisplaySwitcher"] floating enable, move position center, sticky enable, focus
+
+
+for_window [app_id="sway.osd.volume"] floating enable
+for_window [app_id="sway.osd.volume"] border none
+for_window [app_id="sway.osd.volume"] sticky enable
+for_window [app_id="sway.osd.volume"] move position center
