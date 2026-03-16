@@ -169,3 +169,4 @@ bindsym $mod+SHIFT+z exec zapzap
 bindsym $mod+SHIFT+p exec steam
 bindsym $mod+SHIFT+v exec vesktop
 bindsym $mod+SHIFT+d exec discord
+bindsym $mod+SHIFT+t exec ~/.config/sway/scripts/wallpaper_picker.py /home/guilherme/Imagens/Wallpapers

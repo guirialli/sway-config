@@ -29,14 +29,6 @@ for_window [title="ZapZap"] floating enable, resize set 1200 720, move position 
 
 # System
 for_window [title="SwayDisplaySwitcher"] floating enable, move position center, sticky enable, focus
-
-
-for_window [app_id="sway.osd.volume"] floating enable
-for_window [app_id="sway.osd.volume"] border none
-for_window [app_id="sway.osd.volume"] sticky enable
-for_window [app_id="sway.osd.volume"] move position center
-
-for_window [app_id="sway.osd.brightness"] floating enable
-for_window [app_id="sway.osd.brightness"] border none
-for_window [app_id="sway.osd.brightness"] sticky enable
-for_window [app_id="sway.osd.brightness"] move position center
+for_window [app_id="sway.osd.volume"] floating enable, border none, sticky enable, move position center
+for_window [app_id="sway.osd.brightness"] floating enable, border none, sticky enable, move position center
+for_window [app_id="sway.apps.wallpaper-picker"] floating enable, border none, sticky enable, move position center
