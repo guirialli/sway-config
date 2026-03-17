@@ -91,7 +91,7 @@ bindsym $mod+Shift+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Change Monitor
-bindsym $mod+p exec ~/.config/sway/scripts/monitor-swap.py
+bindsym $mod+p exec $sway-manager monitor 
 
 
 # Scratchpad:
@@ -129,14 +129,14 @@ bindsym $mod+r mode "resize"
 
 # Utilities:
 # Special keys to adjust volume via PulseAudio
-bindsym --locked XF86AudioMute exec ~/.config/sway/scripts/osd_volume.py mute 
-bindsym --locked XF86AudioLowerVolume exec ~/.config/sway/scripts/osd_volume.py down  
-bindsym --locked XF86AudioRaiseVolume exec ~/.config/sway/scripts/osd_volume.py up  
+bindsym --locked XF86AudioMute exec $sway-manager osd volume mute 
+bindsym --locked XF86AudioLowerVolume exec $sway-manager osd volume down  
+bindsym --locked XF86AudioRaiseVolume exec $sway-manager osd volume up  
 
 bindsym --locked XF86AudioMicMute exec wpctl set-source-mute \@DEFAULT_SOURCE@ toggle
 # Special keys to adjust brightness via brightnessctl
-bindsym --locked XF86MonBrightnessDown exec ~/.config/sway/scripts/osd_brightness.py down 
-bindsym --locked XF86MonBrightnessUp exec ~/.config/sway/scripts/osd_brightness.py up
+bindsym --locked XF86MonBrightnessDown exec $sway-manager osd brilho down 
+bindsym --locked XF86MonBrightnessUp exec $sway-manager osd brilho up
 
 # Blueman
 bindsym $mod+SHIFT+b exec blueman-manager
@@ -169,4 +169,4 @@ bindsym $mod+SHIFT+z exec zapzap
 bindsym $mod+SHIFT+p exec steam
 bindsym $mod+SHIFT+v exec vesktop
 bindsym $mod+SHIFT+d exec discord
-bindsym $mod+SHIFT+t exec ~/.config/sway/scripts/wallpaper_picker.py /home/guilherme/Imagens/Wallpapers
+bindsym $mod+SHIFT+t exec $sway-manager wallpaper /home/guilherme/Imagens/Wallpapers
