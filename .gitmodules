@@ -1,0 +1,3 @@
+[submodule "sway-manager"]
+	path = sway-manager
+	url = https://github.com/guirialli/sway-manager

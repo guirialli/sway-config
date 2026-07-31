@@ -16,13 +16,14 @@
         "custom/idle"
     ],
     "modules-right": [
-	"pulseaudio",
-	"custom/theme",
+        "pulseaudio",
+        "custom/theme",
         "custom/power-tlp",
         "battery",
-	"custom/conservation",
+        "custom/conservation",
         "tray",
-	"custom/power"
+        "custom/settings",
+        "custom/power"
     ],
     "keyboard-state": {
         "numlock": true,
@@ -44,15 +45,21 @@
         "tooltip-format": "{app}: {title}"
     },
     "custom/clipboard": {
-    	"format":"📋",
-	"interval": 2,
-	"on-click": "cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+        "format":"📋",
+        "interval": 2,
+        "on-click": "cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+    },
+    "custom/settings": {
+        "format": "⚙️",
+        "tooltip": true,
+        "tooltip-format": "SwayManager Control Center",
+        "on-click": "~/.config/sway/bin/SwayManager settings"
     },
     "custom/idle": {
-	"interval": 2,
-	"return-type": "json",
-	"exec": "~/.config/waybar/scripts/idle-status.sh",
-	"on-click": "~/.config/waybar/scripts/toggle_idle.sh"
+        "interval": 2,
+        "return-type": "json",
+        "exec": "~/.config/sway/bin/SwayManager idle status",
+        "on-click": "~/.config/sway/bin/SwayManager idle toggle"
     },
     "tray": {
         // "icon-size": 21,
@@ -67,7 +74,7 @@
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
-	"on-click": "~/.config/waybar/scripts/toggle_brightness_popup.py"
+        "on-click": "~/.config/sway/bin/SwayManager osd brilho"
     },
     "battery": {
         "states": {
@@ -88,11 +95,11 @@
         "bat": "BAT2"
     },
     "custom/conservation": {
-    	"format": "{}",
-    	"interval": 2, // Verifica o estado a cada 5 segundos
-    	"return-type": "json",
-    	"exec": "~/.config/waybar/scripts/conservation-status.sh", // Script para verificar o estado
-    	"on-click": "pkexec --user root ~/sway-config/src/waybar/scripts/toggle-conservation.sh" // Script para alternar ao clicar
+        "format": "{}",
+        "interval": 2,
+        "return-type": "json",
+        "exec": "~/.config/sway/bin/SwayManager battery status",
+        "on-click": "~/.config/sway/bin/SwayManager battery toggle"
     },
     "power-profiles-daemon": {
       "format": "{icon}",
@@ -120,7 +127,7 @@
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": "{volume}% 0",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -139,17 +146,18 @@
        "menu": "on-click",
        "menu-file": "~/.config/waybar/xml/power_menu.xml",
        "menu-actions":{
-       	    "reboot": "systemctl reboot",
-	    "shutdown": "systemctl poweroff",
-	    "suspend": "systemctl suspend",
-	    "logout": "swaymsg exit"
+            "reboot": "systemctl reboot",
+            "shutdown": "systemctl poweroff",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate",
+            "logout": "swaymsg exit"
        }
    },
    "custom/theme": {
       "interval": 2,
       "return-type": "json",
-      "exec": "~/.config/waybar/scripts/theme.sh",
-      "on-click": "~/.config/waybar/scripts/toggle-theme.sh"
+      "exec": "~/.config/sway/bin/SwayManager theme status",
+      "on-click": "~/.config/sway/bin/SwayManager theme toggle"
    },
    "custom/calendar": {
      "return-type": "json",
@@ -160,8 +168,8 @@
    },
    "custom/power-tlp": {
      "return-type": "json",
-     "exec" : "~/.config/waybar/scripts/power-status.sh",
-     "on-click": "~/.config/sway/scripts/power-toggle.sh",
+     "exec" : "~/.config/sway/bin/SwayManager power status",
+     "on-click": "~/.config/sway/bin/SwayManager power toggle",
      "interval": 5,
      "tooltip": true
    }

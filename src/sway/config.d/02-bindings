@@ -143,30 +143,35 @@ bindsym $mod+SHIFT+b exec blueman-manager
 # Ulancher
 bindsym $mod+space exec ulauncher-toggle
 # Swayidle
-bindsym $mod+Ctrl+s exec bash -c "~/sway-config/src/waybar/scripts/toggle_idle.sh"
-bindsym $mod+Ctrl+l exec bash -c "~/sway-config/src/waybar/scripts/toggle_idle.sh -n"
-# Brigth
-bindsym $mod+Ctrl+b exec ~/.config/waybar/scripts/toggle_brightness_popup.py
+bindsym $mod+Ctrl+s exec $sway-manager idle toggle
+bindsym $mod+Ctrl+l exec $sway-manager idle toggle -n
+# Hibernation
+bindsym $mod+Ctrl+h exec systemctl hibernate
+# SwayManager Control Center
+bindsym $mod+comma exec $sway-manager settings
+bindsym $mod+SHIFT+o exec $sway-manager settings
+# Brightness
+bindsym $mod+Ctrl+b exec $sway-manager osd brilho
 # Pavucontrol
 bindsym $mod+Ctrl+a exec pavucontrol
-# Print
-bindsym Print exec ~/.config/sway/scripts/screen_shoot.sh -g
-bindsym $mod+ALT+s exec ~/.config/sway/scripts/screen_shoot.sh -s
-bindsym $mod+ALT+w exec ~/.config/sway/scripts/screen_shoot.sh -w
-bindsym $mod+SHIFT+s exec ~/.config/sway/scripts/screen_shoot.sh -g
+# Print / Screenshots
+bindsym Print exec $sway-manager screenshot area
+bindsym $mod+ALT+s exec $sway-manager screenshot full
+bindsym $mod+ALT+w exec $sway-manager screenshot window
+bindsym $mod+SHIFT+s exec $sway-manager screenshot area
 #Clipboard
 bindsym $mod+c exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
-bindsym $mod+ALT+q exec ~/sway-config/src/sway/scripts/power-toggle.sh
+bindsym $mod+ALT+q exec $sway-manager power toggle
 
 
-#My Peronsal keybinds
+# My Personal keybinds (Flatpak for 3rd-party apps, native for system tools, Chrome & VS Code)
 bindsym $mod+g exec google-chrome-stable
 bindsym $mod+SHIFT+e exec nautilus 
 bindsym $mod+SHIFT+c exec code --ozone-platform=wayland 
 bindsym $mod+SHIFT+r exec remmina
-bindsym $mod+SHIFT+w exec bottles
-bindsym $mod+SHIFT+z exec zapzap
-bindsym $mod+SHIFT+p exec steam
-bindsym $mod+SHIFT+v exec vesktop
-bindsym $mod+SHIFT+d exec discord
+bindsym $mod+SHIFT+w exec flatpak run com.usebottles.bottles || bottles
+bindsym $mod+SHIFT+z exec flatpak run com.rtosta.zapzap || zapzap
+bindsym $mod+SHIFT+p exec flatpak run com.valvesoftware.Steam || steam
+bindsym $mod+SHIFT+v exec flatpak run dev.vencord.Vesktop || vesktop
+bindsym $mod+SHIFT+d exec flatpak run com.discordapp.Discord || discord
 bindsym $mod+SHIFT+t exec $sway-manager wallpaper /home/guilherme/Imagens/Wallpapers

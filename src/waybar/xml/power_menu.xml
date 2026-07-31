@@ -11,9 +11,14 @@
         <property name="label">Reiniciar</property>
       </object>
     </child>
-      <child>
+    <child>
       <object class="GtkMenuItem" id="suspend">
         <property name="label">Suspender</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="hibernate">
+        <property name="label">Hibernar</property>
       </object>
     </child>
     <child>

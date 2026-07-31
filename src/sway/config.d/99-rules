@@ -14,7 +14,8 @@ for_window [app_id="vesktop"] floating enable, move position center, resize set 
 
 for_window [app_id="discord"] floating enable, move position center, resize set 1400 1000
 
-for_window [class="steam"] floating enable, move position center
+for_window [app_id="(?i)steam|com.valvesoftware.Steam"] floating enable, move position center
+for_window [title="(?i)Steam"] floating enable, move position center
 for_window [app_id="org.gnome.Calendar"] floating enable, move position center
 
 for_window [title="Autenticação"] floating enable
@@ -22,12 +23,17 @@ for_window [title="Authentication"] floating enable
 for_window [title="PolicyKit1 Authentication Agent"] floating enable
 #Dev
 for_window [app_id="glade-previewer"] floating enable, move position center
-for_window [class="Emulator"] floating enable
+for_window [app_id="(?i)emulator"] floating enable, move position center
+for_window [title="(?i)emulator"] floating enable, move position center
 
 for_window [title="ZapZap"] floating enable, resize set 1200 720, move position center
 
 
 # System
+for_window [app_id="(?i)btrfs-assistant"] floating enable, move position center, resize set 1200 900
+for_window [title="(?i)Btrfs Assistant"] floating enable, move position center, resize set 1200 900
+for_window [app_id="sway.apps.config-center"] floating enable, move position center, resize set 920 640
+for_window [title="(?i)SwayManager Control Center"] floating enable, move position center, resize set 920 640
 for_window [title="SwayDisplaySwitcher"] floating enable, move position center, sticky enable, focus
 for_window [app_id="sway.osd.volume"] floating enable, border none, sticky enable, move position center
 for_window [app_id="sway.osd.brightness"] floating enable, border none, sticky enable, move position center

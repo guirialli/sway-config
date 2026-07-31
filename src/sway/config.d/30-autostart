@@ -1,14 +1,14 @@
 
 exec waybar
-# Inicia o agente de autenticacao Polkit para janelas graficas de senha
-exec /usr/bin/lxqt-policykit-agent &
+# Agente de Autenticacao Polkit para janelas graficas de senha (root / pkexec)
+exec --no-startup-id ~/.config/sway/scripts/polkit-runner.sh &
 
 
 #Applets
 exec blueman-applet &
 exec mako &
 exec nm-applet --indicator &
-exec $HOME/.config/waybar/scripts/toggle_idle.sh -s 
+exec $sway-manager idle toggle -s 
 exec wl-paste --watch cliphist store
 
 # Portals
@@ -25,7 +25,9 @@ exec autotiling
 #Keyring
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
-exec systemctl --user start  polkit-gnome-authentication-agent-1.service
 
+
+# Autoriza root a exibir janelas graficas via Polkit/pkexec (ex: btrfs-assistant)
+exec xhost +si:localuser:root &
 
 exec gammastep -l -13.85:-40.08 -t 6500:3500
