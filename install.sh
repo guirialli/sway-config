@@ -182,7 +182,29 @@ install_arch_core() {
 
     install_local_fonts
     setup_gnome_polkit
+    setup_wayland_session
     enable_services
+}
+
+setup_wayland_session() {
+    echo "=== Configuring LightDM / Display Manager Wayland Session Entry ==="
+    SWAY_BIN="$(command -v sway || echo "/usr/local/bin/sway")"
+
+    if [ "$DRY_RUN" = true ]; then
+        echo "[DRY-RUN] Would create /usr/share/wayland-sessions/sway.desktop pointing to $SWAY_BIN"
+        return 0
+    fi
+
+    sudo mkdir -p /usr/share/wayland-sessions
+    sudo bash -c "cat << EOF > /usr/share/wayland-sessions/sway.desktop
+[Desktop Entry]
+Name=Sway
+Comment=An i3-compatible Wayland compositor
+Exec=$SWAY_BIN
+Type=Application
+DesktopNames=sway
+EOF"
+    echo "Wayland session entry configured successfully (/usr/share/wayland-sessions/sway.desktop)."
 }
 
 install_debian_core() {
@@ -261,6 +283,7 @@ install_debian_core() {
 
     install_local_fonts
     setup_gnome_polkit
+    setup_wayland_session
     enable_services
 }
 

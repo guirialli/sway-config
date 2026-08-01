@@ -197,14 +197,12 @@ configure_services() {
     run_cmd sudo systemctl enable lightdm
 
     echo "=== Garantindo Entrada de Sessão Wayland para o LightDM ==="
-    if [ ! -f /usr/share/wayland-sessions/sway.desktop ] && [ ! -f /usr/share/wayland-sessions/swayfx.desktop ]; then
-        if command -v sway &>/dev/null; then
-            SWAY_BIN="$(command -v sway)"
-            if [ "$DRY_RUN" = true ]; then
-                echo "[DRY-RUN] Criando /usr/share/wayland-sessions/sway.desktop para $SWAY_BIN"
-            else
-                sudo mkdir -p /usr/share/wayland-sessions
-                sudo bash -c "cat << EOF > /usr/share/wayland-sessions/sway.desktop
+    SWAY_BIN="$(command -v sway || echo "/usr/local/bin/sway")"
+    if [ "$DRY_RUN" = true ]; then
+        echo "[DRY-RUN] Criando /usr/share/wayland-sessions/sway.desktop para $SWAY_BIN"
+    else
+        sudo mkdir -p /usr/share/wayland-sessions
+        sudo bash -c "cat << EOF > /usr/share/wayland-sessions/sway.desktop
 [Desktop Entry]
 Name=Sway
 Comment=An i3-compatible Wayland compositor
@@ -212,8 +210,7 @@ Exec=$SWAY_BIN
 Type=Application
 DesktopNames=sway
 EOF"
-            fi
-        fi
+        echo "Sessão Sway configurada em /usr/share/wayland-sessions/sway.desktop"
     fi
 }
 
