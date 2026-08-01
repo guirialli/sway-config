@@ -19,3 +19,9 @@ client.focused_inactive #4C4C4C #4C4C4C #CCCCCC #4C4C4C
 
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
 
+# --- Integração de Tema Qt (Qt5/Qt6) ---
+# Define qt5ct como a plataforma de temas padrão para apps Qt seguirem o sway-manager
+exec systemctl --user set-environment QT_QPA_PLATFORMTHEME=qt5ct
+exec dbus-update-activation-environment --systemd QT_QPA_PLATFORMTHEME=qt5ct
+
+

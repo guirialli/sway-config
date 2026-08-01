@@ -28,6 +28,8 @@ Options:
   --install-polkit, --polkit Configure GNOME Polkit agent systemd user service (~/.config/systemd/user/polkit-gnome-authentication-agent-1.service).
   --applications, --apps  Install recommended desktop applications extracted from keybindings (Chrome, VS Code, Nautilus, Remmina, Steam, Discord/Vesktop, etc.).
   --configs-only          Skip package installation/compilation and only deploy config symlinks to ~/.config.
+  --pure-sway, --purge-gnome Remove GNOME desktop environment, install LightDM, and setup pure Sway system with Wi-Fi/BT core.
+  --purge-snap, --no-snap Completely purge Snapd/Snaps and lock automatic re-installation via APT pinning.
   --dry-run               Show what commands would be executed without running them.
   -h, --help              Show this help message.
 
@@ -40,6 +42,14 @@ EOF
 # Parse options
 while [[ $# -gt 0 ]]; do
     case "$1" in
+        --purge-snap|--no-snap)
+            shift
+            exec "$SCRIPT_DIR/scripts/purge-snap.sh" "$@"
+            ;;
+        --pure-sway|--purge-gnome)
+            shift
+            exec "$SCRIPT_DIR/scripts/purge-gnome-to-sway.sh" "$@"
+            ;;
         -a|--all)
             INSTALL_CORE=true
             INSTALL_APPS=true
@@ -149,6 +159,7 @@ install_arch_core() {
         swaybg grim slurp wl-clipboard pipewire pipewire-pulse pipewire-alsa
         xdg-desktop-portal-wlr xdg-desktop-portal-gtk foot gnome-keyring jq
         ttf-meslo-nerd-font-powerlevel10k polkit-gnome xorg-xhost btrfs-progs snapper btrfs-assistant
+        qt5ct qt6ct adwaita-qt5 adwaita-qt6 kvantum
     )
 
     run_cmd sudo pacman -S --needed --noconfirm "${ARCH_CORE_PKGS[@]}"
@@ -196,8 +207,9 @@ install_debian_core() {
         waybar swayidle brightnessctl wofi pavucontrol blueman
         network-manager mako-notifier swaybg grim slurp wl-clipboard pipewire
         pipewire-pulse xdg-desktop-portal-wlr xdg-desktop-portal-gtk
-        foot gnome-keyring python3 python3-pip python3-venv python3-gi xwayland jq
+        foot gnome-keyring libpam-gnome-keyring gnome-themes-extra gnome-themes-extra-data gnome-icon-theme gnome-desktop3-data gnome-menus python3 python3-pip python3-venv python3-gi xwayland jq
         lxqt-policykit mate-polkit x11-xserver-utils btrfs-progs snapper
+        qt5ct qt6ct adwaita-qt qt-style-kvantum qt-style-kvantum-themes qt-style-kvantum-l10n
     )
     run_cmd sudo apt install -y "${RUNTIME_CORE[@]}"
 
@@ -497,6 +509,21 @@ fi
 EOF
 
     chmod +x "$WRAPPER_SCRIPT"
+
+    echo "Generating SwayManager desktop entry..."
+    DESKTOP_DIR="$HOME/.local/share/applications"
+    mkdir -p "$DESKTOP_DIR"
+    cat << EOF > "$DESKTOP_DIR/sway-manager.desktop"
+[Desktop Entry]
+Name=SwayManager Control Center
+Comment=Sway & SwayFX Desktop Control Center
+Exec=$WRAPPER_SCRIPT settings
+Icon=preferences-desktop
+Terminal=false
+Type=Application
+Categories=Settings;DesktopSettings;
+EOF
+
     echo "SwayManager successfully installed at: $WRAPPER_SCRIPT"
 }
 

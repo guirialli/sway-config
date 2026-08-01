@@ -8,6 +8,10 @@
 set $mod Mod4
 set $sway-manager ~/.config/sway/bin/SwayManager 
 
+# Ativa o suporte ao XWayland (padrão é enable)
+xwayland enable
+exec xhost +si:localuser:root
+
 # Home row direction keys, like vim
 set $left h
 set $down j
