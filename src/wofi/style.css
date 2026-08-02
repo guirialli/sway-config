@@ -7,10 +7,8 @@
 @define-color border_color #44475a;
 
 window {
-    background-color: @bg_dark;
-    border: 2px solid @highlight;
-    border-radius: 12px;
-    padding: 10px;
+    background-color: transparent;
+    border: none;
     font-family: "JetBrains Mono", "Roboto", "Noto Sans", sans-serif;
     font-size: 14px;
 }
@@ -30,7 +28,10 @@ window {
 }
 
 #outer-box {
-    padding: 4px;
+    background-color: @bg_dark;
+    border: 2px solid @highlight;
+    border-radius: 12px;
+    padding: 10px;
 }
 
 #inner-box {
