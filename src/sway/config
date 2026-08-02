@@ -11,6 +11,7 @@ set $sway-manager ~/.config/sway/bin/SwayManager
 # Ativa o suporte ao XWayland (padrão é enable)
 xwayland enable
 exec xhost +si:localuser:root
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Home row direction keys, like vim
 set $left h

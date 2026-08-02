@@ -218,7 +218,7 @@ install_debian_core() {
         libxkbcommon-dev libxcb-dri3-dev libxcb-present-dev libxcb-res0-dev
         libxcb-render-util0-dev libxcb-ewmh-dev libxcb-icccm4-dev
         libliftoff-dev libdisplay-info-dev liblcms2-dev libpixman-1-dev
-        libgles2-mesa-dev hwdata libudev-dev
+        libgles2-mesa-dev hwdata libudev-dev libxcb-composite0-dev
     )
 
     run_cmd sudo apt update
@@ -270,7 +270,7 @@ install_debian_core() {
         cd ../..
 
         echo "Compiling SwayFX..."
-        meson setup build/
+        meson setup build -Dwlroots:xwayland=enabled
         ninja -C build/
 
         echo "Installing SwayFX..."
