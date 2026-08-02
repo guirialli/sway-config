@@ -517,6 +517,7 @@ install_sway_manager() {
     fi
 
     echo "Generating SwayManager executable wrapper..."
+    rm -f "$WRAPPER_SCRIPT"
     cat << 'EOF' > "$WRAPPER_SCRIPT"
 #!/bin/bash
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
