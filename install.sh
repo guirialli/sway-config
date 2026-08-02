@@ -155,7 +155,7 @@ install_arch_core() {
     
     ARCH_CORE_PKGS=(
         python python-pip python-virtualenv python-gobject xorg-xwayland waybar
-        swayidle brightnessctl wofi pavucontrol blueman networkmanager mako
+        swayidle brightnessctl wofi cliphist pavucontrol blueman networkmanager mako
         swaybg grim slurp wl-clipboard pipewire pipewire-pulse pipewire-alsa
         xdg-desktop-portal-wlr xdg-desktop-portal-gtk foot gnome-keyring jq
         ttf-meslo-nerd-font-powerlevel10k polkit-gnome xorg-xhost btrfs-progs snapper btrfs-assistant
@@ -226,7 +226,7 @@ install_debian_core() {
 
     echo "2. Installing desktop core utilities via apt..."
     RUNTIME_CORE=(
-        waybar swayidle brightnessctl wofi pavucontrol blueman
+        waybar swayidle brightnessctl wofi cliphist pavucontrol blueman
         network-manager mako-notifier swaybg grim slurp wl-clipboard pipewire
         pipewire-pulse xdg-desktop-portal-wlr xdg-desktop-portal-gtk
         foot gnome-keyring libpam-gnome-keyring gnome-themes-extra gnome-themes-extra-data gnome-icon-theme gnome-desktop3-data gnome-menus python3 python3-pip python3-venv python3-gi xwayland jq

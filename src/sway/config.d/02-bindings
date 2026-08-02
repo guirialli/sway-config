@@ -160,7 +160,8 @@ bindsym $mod+ALT+s exec $sway-manager screenshot full
 bindsym $mod+ALT+w exec $sway-manager screenshot window
 bindsym $mod+SHIFT+s exec $sway-manager screenshot area
 #Clipboard
-bindsym $mod+c exec cliphist list | wofi --dmenu | cliphist decode | wl-copy
+bindsym $mod+Ctrl+v exec $sway-manager clipboard
+bindsym $mod+c exec $sway-manager clipboard
 bindsym $mod+ALT+q exec $sway-manager power toggle
 
 
