@@ -226,7 +226,7 @@ install_debian_core() {
 
     echo "2. Installing desktop core utilities via apt..."
     RUNTIME_CORE=(
-        waybar swayidle brightnessctl wofi cliphist pavucontrol blueman
+        waybar swayidle swaylock brightnessctl wofi cliphist pavucontrol blueman
         network-manager mako-notifier swaybg grim slurp wl-clipboard pipewire
         pipewire-pulse xdg-desktop-portal-wlr xdg-desktop-portal-gtk
         foot gnome-keyring libpam-gnome-keyring gnome-themes-extra gnome-themes-extra-data gnome-icon-theme gnome-desktop3-data gnome-menus python3 python3-pip python3-venv python3-gi xwayland jq
@@ -438,7 +438,7 @@ install_debian_apps() {
     DEBIAN_APPS=(
         nautilus remmina gammastep power-profiles-daemon
         cliphist autotiling mpv celluloid flatpak wget
-        libnotify-bin
+        libnotify-bin swaylock
     )
     run_cmd sudo apt update
     run_cmd sudo apt install -y "${DEBIAN_APPS[@]}" || true
