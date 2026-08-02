@@ -1,0 +1,13 @@
+mode=dmenu
+allow_images=true
+allow_markup=true
+insensitive=true
+no_actions=true
+prompt=Buscar aplicativo ou comando...
+width=680
+height=460
+lines=10
+columns=1
+location=center
+hide_scroll=true
+term=foot

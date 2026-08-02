@@ -1,46 +1,76 @@
-/* Cores Roxo Dark */
-@define-color bg_dark #242424; 
-@define-color fg_light #ffffff;
-@define-color highlight #9A67EA; 
-@define-color border_color #4C4C4C;
+/* Sway-Manager Wofi Dark Premium Theme */
+@define-color bg_dark #1e1e2e;
+@define-color bg_surface #282a36;
+@define-color fg_light #f8f8f2;
+@define-color highlight #bd93f9;
+@define-color highlight_hover #9a67ea;
+@define-color border_color #44475a;
 
 window {
-    /* Fundo da janela (Wofi) */
     background-color: @bg_dark;
-    border: 2px solid @border_color;
-    border-radius: 8px; /* Cantos arredondados */
-    padding: 5px;
+    border: 2px solid @highlight;
+    border-radius: 12px;
+    padding: 10px;
+    font-family: "JetBrains Mono", "Roboto", "Noto Sans", sans-serif;
+    font-size: 14px;
 }
 
 #input {
-    /* Caixa de pesquisa */
-    background-color: #333333;
+    background-color: @bg_surface;
     color: @fg_light;
+    border: 1px solid @border_color;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+#input:focus {
     border: 1px solid @highlight;
-    border-radius: 6px;
-    padding: 8px;
-    margin: 5px;
 }
 
 #outer-box {
-    padding: 5px;
+    padding: 4px;
 }
 
 #inner-box {
-    /* Padding interno para as opcoes */
-    padding: 5px;
+    padding: 4px;
 }
 
 #scroll {
-    /* Scrollbar */
+    margin: 4px 0px;
 }
 
 #text {
     color: @fg_light;
+    margin-left: 10px;
+}
+
+#img {
+    margin-right: 8px;
+    border-radius: 4px;
+}
+
+#entry {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    background-color: transparent;
+    transition: background-color 0.15s ease-in-out;
 }
 
 #entry:selected {
-    /* Opcao selecionada */
-    background-color: @highlight; /* Roxo de Destaque */
-    border-radius: 6px;
+    background-color: @highlight;
+    color: #11111b;
+}
+
+#entry:selected #text,
+#entry:selected * {
+    color: #11111b;
+    font-weight: bold;
+}
+
+/* Esconder o icone da seta de acoes adicionais (expander) */
+#expander {
+    display: none;
 }

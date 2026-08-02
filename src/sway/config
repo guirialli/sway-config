@@ -23,7 +23,7 @@ set $right l
 set $term foot
 
 # Your preferred application launcher
-set $menu wofi --show=drun
+set $menu $sway-manager menu
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
