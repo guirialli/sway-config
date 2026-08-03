@@ -4,7 +4,8 @@ exec waybar
 exec --no-startup-id ~/.config/sway/scripts/polkit-runner.sh &
 
 
-#Applets
+# Applets e Daemon
+exec $sway-manager daemon &
 exec blueman-applet &
 exec mako &
 exec nm-applet --indicator &
