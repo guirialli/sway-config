@@ -491,7 +491,7 @@ install_sway_manager() {
         echo "[DRY-RUN] Would sync $SWAY_MGR_SRC to $MGR_DEST"
         echo "[DRY-RUN] Would create Python virtual environment at $VENV_DIR"
         echo "[DRY-RUN] Would install PySide6 & requirements in $VENV_DIR"
-        echo "[DRY-RUN] Would generate executable wrapper script at $WRAPPER_SCRIPT"
+        echo "[DRY-RUN] Would compile and generate executable via Nuitka at $WRAPPER_SCRIPT"
         return 0
     fi
 
@@ -516,9 +516,17 @@ install_sway_manager() {
         "$VENV_DIR/bin/pip" install PySide6 --quiet || true
     fi
 
-    echo "Generating SwayManager executable wrapper..."
-    rm -f "$WRAPPER_SCRIPT"
-    cat << 'EOF' > "$WRAPPER_SCRIPT"
+    echo "Compiling SwayManager with Nuitka..."
+    (
+        cd "$SWAY_MGR_SRC"
+        chmod +x build.sh install.sh 2>/dev/null || true
+        ./install.sh --no-udev || true
+    )
+
+    if [ ! -f "$WRAPPER_SCRIPT" ]; then
+        echo "Generating SwayManager executable fallback wrapper..."
+        rm -f "$WRAPPER_SCRIPT"
+        cat << 'EOF' > "$WRAPPER_SCRIPT"
 #!/bin/bash
 BIN_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 VENV_PYTHON="$BIN_DIR/sway-manager-venv/bin/python"
@@ -531,8 +539,8 @@ else
     exit 1
 fi
 EOF
-
-    chmod +x "$WRAPPER_SCRIPT"
+        chmod +x "$WRAPPER_SCRIPT"
+    fi
 
     echo "Generating SwayManager desktop entry..."
     DESKTOP_DIR="$HOME/.local/share/applications"
