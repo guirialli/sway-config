@@ -83,6 +83,9 @@ bindsym $mod+a focus parent
 # Change Monitor
 bindsym $mod+p exec $sway-manager monitor 
 
+# Mute Mic
+bindsym $mod+Ctrl+m exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
 
 # Scratchpad:
 # Move the currently focused window to the scratchpad
