@@ -41,5 +41,5 @@ for_window [app_id="sway.osd.brightness"] floating enable, border none, sticky e
 for_window [app_id="sway.apps.wallpaper-picker"] floating enable, border none, sticky enable, move position center
 for_window [app_id="sway-manager-freeze"] floating enable, border none, sticky enable, focus
 for_window [title="SwayManagerFreeze_*"] floating enable, border none, sticky enable, focus
-
-
+for_window [app_id="sway.apps.portal-chooser"] floating enable, move position center, resize set 680 500
+for_window [title="(?i)Compartilhar tela"] floating enable, move position center, resize set 680 500

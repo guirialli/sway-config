@@ -207,18 +207,60 @@ EOF"
     echo "Wayland session entry configured successfully (/usr/share/wayland-sessions/sway.desktop)."
 }
 
+build_meson_tarball() {
+    local name="$1"
+    local version="$2"
+    local url="$3"
+    local tarball="$4"
+    local src_dir="$5"
+    local pkg_name="$6"
+    local pkg_version="$7"
+    shift 7
+    local meson_opts=("$@")
+
+    if [ "$DRY_RUN" = true ]; then
+        echo "[DRY-RUN] Would download and build $name $version from $url and install to /usr/local"
+        return 0
+    fi
+
+    if pkg-config --exists "$pkg_name >= $pkg_version" 2>/dev/null; then
+        echo "$name $version (or newer) already installed: $(pkg-config --modversion "$pkg_name")"
+        return 0
+    fi
+
+    mkdir -p "$BUILD_DIR"
+    cd "$BUILD_DIR"
+
+    rm -rf "$src_dir"
+    if [ ! -f "$tarball" ]; then
+        echo "Downloading $name $version..."
+        wget -q "$url" -O "$tarball"
+    fi
+    tar -xf "$tarball"
+    cd "$src_dir"
+
+    echo "Building $name $version..."
+    meson setup build/ --prefix=/usr/local "${meson_opts[@]}"
+    ninja -C build/
+
+    echo "Installing $name $version..."
+    sudo ninja -C build/ install
+    sudo ldconfig
+    echo "$name installed: $(pkg-config --modversion "$pkg_name")"
+}
+
 install_debian_core() {
     echo "=== [Debian/Ubuntu] Installing Core Dependencies & Building SwayFX ==="
 
     echo "1. Installing build dependencies via apt..."
     BUILD_DEPS=(
         meson pkg-config cmake git scdoc wayland-protocols libwayland-dev
-        libpcre2-dev libjson-c-dev libpango1.0-dev libcairo2-dev
+        bison libpcre2-dev libjson-c-dev libpango1.0-dev libcairo2-dev
         libgdk-pixbuf-2.0-dev libdrm-dev libgbm-dev libinput-dev libseat-dev
         libxkbcommon-dev libxcb-dri3-dev libxcb-present-dev libxcb-res0-dev
         libxcb-render-util0-dev libxcb-ewmh-dev libxcb-icccm4-dev
         libliftoff-dev libdisplay-info-dev liblcms2-dev libpixman-1-dev
-        libgles2-mesa-dev hwdata libudev-dev libxcb-composite0-dev
+        libgles2-mesa-dev hwdata libudev-dev libffi-dev libexpat1-dev
     )
 
     run_cmd sudo apt update
@@ -235,11 +277,46 @@ install_debian_core() {
     )
     run_cmd sudo apt install -y "${RUNTIME_CORE[@]}"
 
-    echo "3. Building SwayFX v0.5.3 from source..."
     BUILD_DIR="$HOME/build"
-    
+
+    echo "3. Installing dependencies newer than Debian Trixie packages..."
+
+    build_meson_tarball "Wayland" "1.24.0" \
+        "https://gitlab.freedesktop.org/wayland/wayland/-/releases/1.24.0/downloads/wayland-1.24.0.tar.xz" \
+        "wayland-1.24.0.tar.xz" "$BUILD_DIR/wayland-1.24.0" \
+        "wayland-server" "1.24.0" \
+        -Ddocumentation=false -Dtests=false -Ddtd_validation=false
+
+    build_meson_tarball "Wayland Protocols" "1.47" \
+        "https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/1.47/downloads/wayland-protocols-1.47.tar.xz" \
+        "wayland-protocols-1.47.tar.xz" "$BUILD_DIR/wayland-protocols-1.47" \
+        "wayland-protocols" "1.47" \
+        -Dtests=false
+
+    build_meson_tarball "libdrm" "2.4.129" \
+        "https://dri.freedesktop.org/libdrm/libdrm-2.4.129.tar.xz" \
+        "libdrm-2.4.129.tar.xz" "$BUILD_DIR/libdrm-2.4.129" \
+        "libdrm" "2.4.129" \
+        -Dintel=disabled -Dradeon=disabled -Damdgpu=disabled -Dnouveau=disabled \
+        -Dvmwgfx=disabled -Domap=disabled -Dexynos=disabled -Dfreedreno=disabled \
+        -Dtegra=disabled -Dvc4=disabled -Detnaviv=disabled -Dcairo-tests=disabled \
+        -Dman-pages=disabled -Dvalgrind=disabled -Dtests=false
+
+    build_meson_tarball "libxkbcommon" "1.8.0" \
+        "https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-1.8.0.tar.gz" \
+        "xkbcommon-1.8.0.tar.gz" "$BUILD_DIR/libxkbcommon-xkbcommon-1.8.0" \
+        "xkbcommon" "1.8.0" \
+        -Denable-tools=false -Denable-x11=false -Denable-docs=false -Denable-wayland=false
+
+    build_meson_tarball "pixman" "0.46.0" \
+        "https://www.cairographics.org/releases/pixman-0.46.0.tar.gz" \
+        "pixman-0.46.0.tar.gz" "$BUILD_DIR/pixman-0.46.0" \
+        "pixman-1" "0.46.0" \
+        -Dtests=disabled -Ddemos=disabled -Dgtk=disabled -Dlibpng=disabled
+
+    echo "4. Building SwayFX v0.6 from source..."
     if [ "$DRY_RUN" = true ]; then
-        echo "[DRY-RUN] Would clone and build SwayFX (v0.5.3), SceneFX (v0.4.1), and wlroots (v0.19.0) in $BUILD_DIR/swayfx"
+        echo "[DRY-RUN] Would clone and build SwayFX (v0.6), SceneFX (v0.5), and wlroots (v0.20.2) in $BUILD_DIR/swayfx"
     else
         mkdir -p "$BUILD_DIR"
         cd "$BUILD_DIR"
@@ -249,28 +326,28 @@ install_debian_core() {
             rm -rf swayfx
         fi
 
-        echo "Cloning SwayFX v0.5.3..."
+        echo "Cloning SwayFX v0.6..."
         git clone https://github.com/WillPower3309/swayfx.git
         cd swayfx
-        git checkout 0.5.3
+        git checkout 0.6
 
         mkdir subprojects
         cd subprojects
 
-        echo "Cloning SceneFX v0.4.1 subproject..."
+        echo "Cloning SceneFX v0.5 subproject..."
         git clone https://github.com/wlrfx/scenefx.git
         cd scenefx
-        git checkout 0.4.1
+        git checkout 0.5
         cd ..
 
-        echo "Cloning wlroots v0.19.0 subproject..."
+        echo "Cloning wlroots v0.20.2 subproject..."
         git clone https://gitlab.freedesktop.org/wlroots/wlroots.git
         cd wlroots
-        git checkout 0.19.0
+        git checkout 0.20.2
         cd ../..
 
         echo "Compiling SwayFX..."
-        meson setup build -Dwlroots:xwayland=enabled
+        meson setup build/
         ninja -C build/
 
         echo "Installing SwayFX..."

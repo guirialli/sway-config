@@ -1,5 +1,5 @@
 A guide to installing SwayFX on Debian 13 (Trixie/Sid)
-Note: This guide targets SwayFX 0.5.3 (based on Sway 1.11). It manually builds the required dependencies (wlroots 0.19.0 and scenefx 0.4.1) using Meson subprojects to ensure compatibility and stability.
+Note: This guide targets SwayFX 0.6 (based on Sway 1.12). It manually builds the required dependencies (wlroots 0.20.2 and scenefx 0.5) using Meson subprojects to ensure compatibility and stability.
 
 1. Install Dependencies
 Debian Trixie requires a specific set of development headers, particularly for the newer wlroots 0.19 backend (which needs liblcms2, libliftoff, and libdisplay-info).
@@ -20,26 +20,25 @@ We will use the Meson Subprojects method. This places the specific versions of w
 mkdir -p ~/build
 cd ~/build
 
-# 1. Clone SwayFX 0.5.3 (The Window Manager)
+# 1. Clone SwayFX 0.6 (The Window Manager)
 git clone https://github.com/WillPower3309/swayfx.git
 cd swayfx
-git checkout 0.5.3
+git checkout 0.6
 
 # 2. Setup Subprojects Directory
 mkdir subprojects
 cd subprojects
 
-# 3. Clone SceneFX 0.4.1 (The Rendering FX Library)
-# Note: 0.4.1 is required for wlroots 0.19 support
+# 3. Clone SceneFX 0.5 (The Rendering FX Library)
 git clone https://github.com/wlrfx/scenefx.git
 cd scenefx
-git checkout 0.4.1
+git checkout 0.5
 cd ..
 
-# 4. Clone Wlroots 0.19.0 (The Wayland Compositor Backend)
+# 4. Clone Wlroots 0.20.2 (The Wayland Compositor Backend)
 git clone https://gitlab.freedesktop.org/wlroots/wlroots.git
 cd wlroots
-git checkout 0.19.0
+git checkout 0.20.2
 
 # Return to source root
 cd ../..
@@ -47,8 +46,8 @@ Your directory structure should now look like this:
 
 ~/build/swayfx
 └── subprojects
-    ├── scenefx (v0.4.1)
-    └── wlroots (v0.19.0)
+    ├── scenefx (v0.5)
+    └── wlroots (v0.20.2)
 3. Compile and Install
 Now we build everything in one go. Meson will detect the code in subprojects/ and build it automatically.
 
@@ -69,5 +68,5 @@ Check that the installation was successful and is using the correct version base
 
 sway --version
 # Expected Output: 
-# swayfx version 0.5.3... (based on sway 1.11.0)
-Guide updated for Debian 13 / SwayFX 0.5.3 with ♥️
+# swayfx version 0.6... (based on sway 1.12.0)
+Guide updated for Debian 13 / SwayFX 0.6 with ♥️♥️
