@@ -302,11 +302,16 @@ install_debian_core() {
         -Dtegra=disabled -Dvc4=disabled -Detnaviv=disabled -Dcairo-tests=disabled \
         -Dman-pages=disabled -Dvalgrind=disabled -Dtests=false
 
+    # A lib custom instala em /usr/local, cujo x-locale-root padrao
+    # (/usr/local/share/X11/locale) nao contem a tabela Compose do sistema.
+    # Sem isso o foot nao compoe dead keys (ex.: ~ + a nunca vira ã).
+    # Aponta para o Compose do pacote libx11-data: /usr/share/X11/locale.
     build_meson_tarball "libxkbcommon" "1.8.0" \
         "https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-1.8.0.tar.gz" \
         "xkbcommon-1.8.0.tar.gz" "$BUILD_DIR/libxkbcommon-xkbcommon-1.8.0" \
         "xkbcommon" "1.8.0" \
-        -Denable-tools=false -Denable-x11=false -Denable-docs=false -Denable-wayland=false
+        -Denable-tools=false -Denable-x11=false -Denable-docs=false -Denable-wayland=false \
+        -Dx-locale-root=/usr/share/X11/locale
 
     build_meson_tarball "pixman" "0.46.0" \
         "https://www.cairographics.org/releases/pixman-0.46.0.tar.gz" \
