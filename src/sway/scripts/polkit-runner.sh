@@ -1,10 +1,16 @@
 #!/bin/bash
 # Polkit Authentication Agent Launcher for Sway / Wayland
+#
+# Prefere o agente nativo do SwayManager (`SwayManager polkit agent`,
+# instalado via `sway-manager/install.sh --install-polkit`); cai para os
+# agentes externos legados (gnome/kde/lxqt/mate/hypr) se o nativo ainda não
+# estiver instalado. Mantido como fallback do 30-autostart durante a transição.
 
-# Terminate any duplicate running polkit agents to avoid D-Bus conflicts
-pkill -x -u "$USER" polkit-gnome-authentication-agent-1 lxqt-policykit-agent polkit-kde-authentication-agent-1 hyprpolkitagent mate-polkit 2>/dev/null || true
+# Terminate any duplicate running polkit agents to avoid D-Bus conflicts.
+# `pkill -f` (not `-x`): comm truncates at 15 chars (`lxqt-policykit-`), so
+# exact match would never catch lxqt.
+pkill -f -u "$USER" 'polkit-gnome-authentication-agent-1|lxqt-policykit-agent|polkit-kde-authentication-agent-1|hyprpolkitagent|mate-polkit|lxpolkit' 2>/dev/null || true
 sleep 0.2
-
 # Update D-Bus & systemd user environment cleanly
 ENV_VARS=("WAYLAND_DISPLAY" "SWAYSOCK" "XDG_CURRENT_DESKTOP=sway")
 if [ -n "$DISPLAY" ]; then
@@ -16,6 +22,13 @@ if command -v dbus-update-activation-environment &>/dev/null; then
 fi
 if command -v systemctl &>/dev/null; then
     systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP DISPLAY &>/dev/null || true
+fi
+
+# 0. Native SwayManager agent (preferred; see specs/domains/polkit.md).
+NATIVE_AGENT="$HOME/.config/sway/bin/SwayManager"
+if [ -x "$NATIVE_AGENT" ]; then
+    echo "Launching native SwayManager Polkit Agent"
+    exec "$NATIVE_AGENT" polkit agent
 fi
 
 # List of known polkit agent paths across distros (Arch, Debian, Ubuntu, Fedora, etc.)
@@ -52,5 +65,5 @@ if [ -n "$DYNAMIC_AGENT" ] && [ -x "$DYNAMIC_AGENT" ]; then
 fi
 
 echo "Error: No GUI Polkit authentication agent binary found on system!" >&2
-echo "Please run: ./install.sh --install-polkit (or install 'polkit-gnome' / 'lxqt-policykit' package)." >&2
+echo "Please run: sway-manager/install.sh --install-polkit (or install 'polkit-gnome' / 'lxqt-policykit' package)." >&2
 exit 1

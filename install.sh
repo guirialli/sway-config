@@ -25,7 +25,7 @@ Options:
   -a, --all               Install everything: SwayFX core, sway-manager, polkit, recommended applications, services, and deploy configs.
   --swayfx, --core        Install Sway/SwayFX core window manager, desktop dependencies, sway-manager, polkit, and services.
   --sway-manager          Install/update sway-manager PySide6 tool and launcher wrapper (~/.config/sway/bin/SwayManager).
-  --install-polkit, --polkit Configure GNOME Polkit agent systemd user service (~/.config/systemd/user/polkit-gnome-authentication-agent-1.service).
+  --install-polkit, --polkit DEPRECATED: o agente Polkit agora é nativo do SwayManager — use sway-manager/install.sh --install-polkit.
   --applications, --apps  Install recommended desktop applications extracted from keybindings (Chrome, VS Code, Nautilus, Remmina, Steam, Discord/Vesktop, etc.).
   --configs-only          Skip package installation/compilation and only deploy config symlinks to ~/.config.
   --pure-sway, --purge-gnome Remove GNOME desktop environment, install LightDM, and setup pure Sway system with Wi-Fi/BT core.
@@ -164,6 +164,10 @@ install_arch_core() {
 
     run_cmd sudo pacman -S --needed --noconfirm "${ARCH_CORE_PKGS[@]}"
 
+    echo "Installing Tauri/WebKitGTK build dependencies (SwayManagerGUI)..."
+    ARCH_TAURI_PKGS=(webkit2gtk-4.1 gtk3 libayatana-appindicator librsvg openssl patchelf curl file base-devel)
+    run_cmd sudo pacman -S --needed --noconfirm "${ARCH_TAURI_PKGS[@]}"
+
     AUR_HELPER=""
     if command -v yay &>/dev/null; then
         AUR_HELPER="yay"
@@ -277,6 +281,13 @@ install_debian_core() {
     )
     run_cmd sudo apt install -y "${RUNTIME_CORE[@]}"
 
+    echo "2b. Installing Tauri/WebKitGTK build dependencies (SwayManagerGUI)..."
+    TAURI_DEPS=(
+        libwebkit2gtk-4.1-dev libgtk-3-dev libayatana-appindicator3-dev
+        librsvg2-dev libssl-dev patchelf curl file
+    )
+    run_cmd sudo apt install -y "${TAURI_DEPS[@]}"
+
     BUILD_DIR="$HOME/build"
 
     echo "3. Installing dependencies newer than Debian Trixie packages..."
@@ -370,7 +381,14 @@ install_debian_core() {
 }
 
 setup_gnome_polkit() {
-    echo "=== Configuring GNOME Polkit Authentication Agent ==="
+    echo "=== Polkit: agente nativo do SwayManager (setup_gnome_polkit legado) ==="
+    echo "O agente externo (gnome/lxqt/mate) foi substituído pelo agente nativo."
+    echo "Delegando para sway-manager/install.sh --install-polkit ..."
+    if [ -x "$SCRIPT_DIR/sway-manager/install.sh" ]; then
+        ( cd "$SCRIPT_DIR/sway-manager" && ./install.sh --install-polkit )
+        return 0
+    fi
+    echo "Aviso: sway-manager/install.sh não encontrado; caindo no setup legado." >&2
 
     POLKIT_BIN=""
     POSSIBLE_PATHS=(
@@ -444,6 +462,7 @@ EOF
     fi
 
     echo "GNOME Polkit user service configured successfully ($POLKIT_BIN)."
+    echo "NOTA: considere migrar para o agente nativo: sway-manager/install.sh --install-polkit"
 }
 
 install_local_fonts() {

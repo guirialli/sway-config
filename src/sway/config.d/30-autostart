@@ -1,7 +1,7 @@
 
 exec waybar
 # Agente de Autenticacao Polkit para janelas graficas de senha (root / pkexec)
-exec --no-startup-id ~/.config/sway/scripts/polkit-runner.sh &
+exec $sway-manager polkit agent &
 
 
 # Applets e Daemon

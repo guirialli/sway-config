@@ -1,5 +1,7 @@
 # Torna a janela do agente Polkit do LXQt sempre flutuante e centralizada
 for_window [app_id="lxqt-policykit-agent"] floating enable, resize set 600 400, move to center
+# Diálogo do agente Polkit nativo do SwayManager (specs/domains/polkit.md §3.4)
+for_window [app_id="org.swaymanager.PolkitAuth"] floating enable, move position center, sticky enable, focus
 
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, resize set 1200 900, move to center
 
