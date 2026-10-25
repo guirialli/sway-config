@@ -276,7 +276,7 @@ install_debian_core() {
         network-manager mako-notifier swaybg grim slurp wl-clipboard pipewire
         pipewire-pulse xdg-desktop-portal-wlr xdg-desktop-portal-gtk
         foot gnome-keyring libpam-gnome-keyring gnome-themes-extra gnome-themes-extra-data gnome-icon-theme gnome-desktop3-data gnome-menus python3 python3-pip python3-venv python3-gi xwayland jq
-        lxqt-policykit mate-polkit x11-xserver-utils btrfs-progs snapper
+        mate-polkit x11-xserver-utils btrfs-progs snapper
         qt5ct qt6ct adwaita-qt qt-style-kvantum qt-style-kvantum-themes qt-style-kvantum-l10n
     )
     run_cmd sudo apt install -y "${RUNTIME_CORE[@]}"
@@ -395,8 +395,6 @@ setup_gnome_polkit() {
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         "/usr/libexec/polkit-gnome-authentication-agent-1"
         "/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1"
-        "/usr/bin/lxqt-policykit-agent"
-        "/usr/libexec/lxqt-policykit-agent"
         "/usr/libexec/polkit-mate-authentication-agent-1"
         "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
     )
@@ -411,9 +409,9 @@ setup_gnome_polkit() {
     if [ -z "$POLKIT_BIN" ]; then
         echo "Polkit agent package not found. Attempting package installation..."
         if [ "$OS_FAMILY" = "arch" ]; then
-            run_cmd sudo pacman -S --needed --noconfirm polkit-gnome lxqt-policykit || true
+            run_cmd sudo pacman -S --needed --noconfirm polkit-gnome || true
         elif [ "$OS_FAMILY" = "debian" ]; then
-            run_cmd sudo apt install -y lxqt-policykit mate-polkit || true
+            run_cmd sudo apt install -y mate-polkit || true
         fi
 
         for path in "${POSSIBLE_PATHS[@]}"; do

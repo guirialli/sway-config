@@ -153,7 +153,7 @@ purge_debian_gnome() {
         pipewire pipewire-pulse wireplumber pavucontrol
         waybar swayidle brightnessctl wofi mako-notifier swaybg grim slurp wl-clipboard
         foot nautilus gnome-keyring libpam-gnome-keyring gnome-themes-extra gnome-themes-extra-data gnome-icon-theme gnome-desktop3-data gnome-menus gvfs gvfs-backends gvfs-fuse file-roller seahorse xdg-user-dirs xdg-utils adwaita-icon-theme dconf-cli dconf-gsettings-backend python3 python3-pip python3-venv python3-gi xwayland jq
-        lxqt-policykit mate-polkit x11-xserver-utils btrfs-progs snapper
+        mate-polkit x11-xserver-utils btrfs-progs snapper
         qt5ct qt6ct adwaita-qt qt-style-kvantum qt-style-kvantum-themes qt-style-kvantum-l10n
         xdg-desktop-portal-wlr xdg-desktop-portal-gtk xdg-desktop-portal
     )
